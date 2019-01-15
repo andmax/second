@@ -52,7 +52,8 @@ RUN apt-get update -y && \
         emacs \
         graphviz \
         texlive-xetex \
-        cmake-gui
+        cmake-gui \
+        libgeos-dev
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 

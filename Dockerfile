@@ -51,7 +51,8 @@ RUN apt-get update -y && \
         strace \
         emacs \
         graphviz \
-        texlive-xetex
+        texlive-xetex \
+        cmake-gui
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 

@@ -53,7 +53,8 @@ RUN apt-get update -y && \
         graphviz \
         texlive-xetex \
         cmake-gui \
-        libgeos-dev
+        libgeos-dev \
+        libhdf5-dev
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 

@@ -127,6 +127,15 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384:/usr/lib/nvidia-390:/usr/lib/nvidia-396:/usr/lib/powerpc64le-linux-gnu
 
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends openjdk-8-jdk
+
+RUN wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/bazel/ubuntu_16.04/bazel_bin_ppc64le_0.16.1 -P /bin/ && \
+    chmod a+x /bin/bazel_bin_ppc64le_0.16.1 && \
+    ln -s /bin/bazel_bin_ppc64le_0.16.1 /bin/bazel
+
+ENV TMP=/tmp
+
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
 

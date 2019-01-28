@@ -54,7 +54,8 @@ RUN apt-get update -y && \
         texlive-xetex \
         cmake-gui \
         libgeos-dev \
-        libhdf5-dev
+        libhdf5-dev \
+        gnuplot
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 

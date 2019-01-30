@@ -80,8 +80,8 @@ RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/soft
 RUN tar -x -f /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 -C /var/tmp -j 
 RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran ./configure --prefix=/usr/local/openmpi --disable-getpwuid --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs && \
-    make -j16 && \
-    make -j16 install
+    make -j32 && \
+    make -j32 install
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH \
@@ -93,7 +93,7 @@ RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
 
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384:/usr/lib/nvidia-390:/usr/lib/nvidia-396
-RUN cd /usr/local/cuda/samples && make -j16 -k ; exit 0
+RUN cd /usr/local/cuda/samples && make -j32 -k ; exit 0
 RUN ls -l /usr/lib
 
 COPY url.txt /etc/NAE/url.txt
@@ -118,6 +118,7 @@ RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 
 RUN conda create -n tf -c conda-forge python=3.6 keras-gpu=2.1.5 tensorflow-gpu numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost pydot
 
+# Install tensorflow 1.12.0 from custom wheel file
 COPY tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl /tmp/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl
 RUN source activate tf && pip install --yes /tmp/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl
 
@@ -143,5 +144,6 @@ ENV TMP=/tmp
 
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
+
 
 

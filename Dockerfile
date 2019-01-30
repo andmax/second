@@ -120,7 +120,7 @@ RUN conda create -n tf -c conda-forge python=3.6 keras-gpu=2.1.5 tensorflow-gpu 
 
 # Install tensorflow 1.12.0 from custom wheel file
 RUN wget https://github.com/patrickhuhal/second/releases/download/v1.2-pre/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl -P /tmp/ && \
-    pip install --yes /tmp/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl
+    pip install --no-cache-dir /tmp/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl
 
 RUN conda create -n py35 -c conda-forge python=3.5 numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost
 

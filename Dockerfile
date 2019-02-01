@@ -56,7 +56,8 @@ RUN apt-get update -y && \
         libgeos-dev \
         libhdf5-dev \
         gnuplot \
-        libnccl2
+        libnccl2 \
+        libnccl-dev
         
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 

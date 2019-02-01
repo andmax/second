@@ -58,8 +58,10 @@ RUN apt-get update -y && \
         gnuplot \
         libnccl2 \
         libnccl-dev \
-        libffi-dev
-        
+        libffi-dev \
+        debhelper \
+        dkms
+
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
 
 # OpenMPI version 3.0.0
@@ -124,7 +126,7 @@ RUN conda create -n tf -c conda-forge python=3.6 keras-gpu=2.1.5 tensorflow-gpu 
 # Install tensorflow 1.12.0 from custom wheel file
 #USER nimbix
 RUN wget https://github.com/patrickhuhal/second/releases/download/v1.2-pre/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl -P /tmp/ && \
-    /bin/bash -c "source activate tf && pip install --no-cache-dir /tmp/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl"
+    /bin/bash -c "source activate tf && pip install --no-cache-dir /tmp/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl && pip install --no-cache-dir horovod"
 
 #USER root
 RUN conda create -n py35 -c conda-forge python=3.5 numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost

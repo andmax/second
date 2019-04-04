@@ -149,9 +149,9 @@ ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384:/usr/lib/nvidia-390:/us
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends openjdk-8-jdk
 
-RUN wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/bazel/ubuntu_16.04/bazel_bin_ppc64le_0.18.1 -P /bin/ && \
-    chmod a+x /bin/bazel_bin_ppc64le_0.18.1 && \
-    ln -s /bin/bazel_bin_ppc64le_0.18.1 /bin/bazel
+#RUN wget https://oplab9.parqtec.unicamp.br/pub/ppc64el/bazel/ubuntu_16.04/bazel_bin_ppc64le_0.18.1 -P /bin/ && \
+#    chmod a+x /bin/bazel_bin_ppc64le_0.18.1 && \
+#    ln -s /bin/bazel_bin_ppc64le_0.18.1 /bin/bazel
 
 ENV TMP=/tmp
 

@@ -8,7 +8,7 @@
         "Software Testing"
     ], 
     "machines": [
-        "*_ingrain"
+        "*",
     ],
     "vault-types": [
         "FILE", 

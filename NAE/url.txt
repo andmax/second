@@ -1,1 +1,0 @@
-https://%PUBLICADDR%:4200/?password=%NIMBIXPASSWD%

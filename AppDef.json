@@ -1,5 +1,5 @@
 {
-    "name": "Ubuntu Linux for POWER", 
+    "name": "Ubuntu latest ppc64le", 
     "description": "Ubuntu Linux ephemeral environment on POWER system with NVIDIA CUDA toolkit.", 
     "author": "Nimbix, Inc.", 
     "licensed": true, 

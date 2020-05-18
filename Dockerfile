@@ -3,7 +3,7 @@ FROM ppc64le/ubuntu:latest
 RUN apt-get -y update && \
     apt-get -y install curl && \
     curl -H 'Cache-Control: no-cache' \
-    https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh \
+    https://raw.githubusercontent.com/andmax/second/master/install_nimbix.sh \
     | bash -s -- --setup-nimbix-desktop
 
 # Expose port 22 for local JARVICE emulation in docker

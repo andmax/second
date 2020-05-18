@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ppc64le/ubuntu:latest
 
 RUN apt-get -y update && \
     apt-get -y install curl && \

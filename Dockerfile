@@ -1,9 +1,9 @@
-FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04
+FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu16.04
 
 RUN apt-get -y update && \
     apt-get -y install curl && \
     curl -H 'Cache-Control: no-cache' \
-    https://raw.githubusercontent.com/andmax/second/master/install_nimbix.sh \
+    https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh \
     | bash -s -- --setup-nimbix-desktop
 
 # Expose port 22 for local JARVICE emulation in docker

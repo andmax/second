@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.2-cudnn7-rdevel-ubuntu16.04
+FROM nvidia/cuda:10.2-cudnn7-devel-ubuntu16.04
 
 RUN apt-get -y update && \
     apt-get -y install curl && \

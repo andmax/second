@@ -1,4 +1,4 @@
-FROM ppc64le/ubuntu:latest
+FROM nvidia/cuda:10.2-cudnn7-runtime-ubuntu18.04
 
 RUN apt-get -y update && \
     apt-get -y install curl && \

@@ -1,5 +1,5 @@
 {
-    "name": "Ubuntu latest ppc64le", 
+    "name": "Ubuntu_16.04 ppc64le CUDA_10.2_cudnn_7", 
     "description": "Ubuntu Linux ephemeral environment on POWER system with NVIDIA CUDA toolkit.", 
     "author": "Nimbix, Inc.", 
     "licensed": true, 

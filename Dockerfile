@@ -1,11 +1,11 @@
 FROM jarvice/ubuntu-cuda-ppc64le:bionic
 
-RUN apt -y update
-RUN apt -y install htop python3 python3-pip
-RUN apt -y clean
+RUN apt-get -y update
+RUN apt-get -y install htop python3 python3-pip
+RUN apt-get -y clean
 
 RUN pip3 install --upgrade pip
-RUN pip3 install socket numpy jupyter
+RUN pip3 install sockets numpy jupyter
 RUN pip3 install ipython ipyparallel
 
 # Expose port 22 for local JARVICE emulation in docker

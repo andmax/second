@@ -1,7 +1,7 @@
 {
-    "name": "Ubuntu_16.04 ppc64le CUDA_10.2_cudnn_7", 
+    "name": "Ubuntu 18.04 ppc64le CUDA 10.0",
     "description": "Ubuntu Linux ephemeral environment on POWER system with NVIDIA CUDA toolkit.", 
-    "author": "Nimbix, Inc.", 
+    "author": "Andre Maximo", 
     "licensed": true, 
     "classifications": [
         "Software Development",
@@ -18,42 +18,11 @@
         "OBJECT"
     ], 
     "commands": {
-        "run": {
-            "path": "/bin/bash", 
-            "interactive": false, 
-            "name": "Run",
-            "description": "Run a batch command using /bin/bash.  The output may be monitored directly in your web browser.",
-            "parameters": {
-                "-l": {
-                    "name": "-l",
-                    "description": "-l",
-                    "type": "CONST",
-                    "value": "-l",
-                    "positional": true,
-                    "required": true
-                },
-                "-c": {
-                    "name": "-c",
-                    "description": "-c",
-                    "type": "CONST",
-                    "value": "-c",
-                    "positional": true,
-                    "required": true
-                },
-                "command": {
-                    "name": "Command",
-                    "description": "Command to run",
-                    "type": "STR",
-                    "positional": true,
-                    "required": true
-                }
-            }
-        }, 
         "launch": {
             "path": "/sbin/init", 
             "interactive": true, 
             "name": "Launch", 
-            "description": "Launch an ephemeral environment and connect directly in your web browser or via SSH.", 
+            "description": "Launch an ephemeral environment and connect directly via SSH.", 
             "parameters": {}
         }
     }, 

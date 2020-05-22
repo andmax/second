@@ -1,4 +1,5 @@
 FROM jarvice/ubuntu-cuda-ppc64le:bionic
+LABEL maintainer "Andre Maximo <andmax@gmail.com>"
 
 RUN apt-get -y update
 RUN apt-get -y install curl htop emacs python3 python3-pip
@@ -24,4 +25,4 @@ ENV PATH="${PATH}:/usr/local/bin"
 
 RUN pip3 install mpi4py
 
-RUN apt-get -y install cuda-toolkit-9-2
+RUN apt-get -y install cuda-9-2

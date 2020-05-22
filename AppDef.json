@@ -1,6 +1,6 @@
 {
     "name": "Ubuntu 18.04 ppc64le CUDA 10.0",
-    "description": "Ubuntu Linux ephemeral environment on POWER system with NVIDIA CUDA toolkit.", 
+    "description": "Ubuntu 18.04 on POWER 8/9 systems with NVIDIA CUDA 10.0", 
     "author": "Andre Maximo", 
     "licensed": true, 
     "classifications": [
@@ -22,7 +22,7 @@
             "path": "/sbin/init", 
             "interactive": true, 
             "name": "Launch", 
-            "description": "Launch an ephemeral environment and connect directly via SSH.", 
+            "description": "Launch and connect via SSH", 
             "parameters": {}
         }
     }, 

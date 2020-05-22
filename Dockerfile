@@ -1,7 +1,7 @@
 FROM jarvice/ubuntu-cuda-ppc64le:bionic
 
 RUN apt-get -y update
-RUN apt-get -y install htop python3 python3-pip
+RUN apt-get -y install curl htop python3 python3-pip
 RUN apt-get -y clean
 
 RUN pip3 install --upgrade pip
@@ -15,8 +15,6 @@ RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/j
 
 ENV MPI_VERSION 2.0.1
 
-RUN apt-get -y update && \
-    apt-get -y install curl && \
-    curl -H 'Cache-Control: no-cache' \
+RUN curl -H 'Cache-Control: no-cache' \
         https://raw.githubusercontent.com/nimbix/base-ubuntu-openmpi/master/install.sh \
-        | bash -s
+            | bash -s

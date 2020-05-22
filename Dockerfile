@@ -1,7 +1,7 @@
 FROM jarvice/ubuntu-cuda-ppc64le:bionic
 
 RUN apt-get -y update
-RUN apt-get -y install curl htop python3 python3-pip
+RUN apt-get -y install curl htop emacs python3 python3-pip
 RUN apt-get -y clean
 
 RUN pip3 install --upgrade pip

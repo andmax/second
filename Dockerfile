@@ -19,4 +19,7 @@ RUN curl -H 'Cache-Control: no-cache' \
         https://raw.githubusercontent.com/nimbix/base-ubuntu-openmpi/master/install.sh \
             | bash -s
 
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib"
+ENV PATH="${PATH}:/usr/local/bin"
+
 RUN pip3 install mpi4py

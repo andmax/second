@@ -87,7 +87,7 @@ RUN conda install -c conda-forge boost
 
 RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 
-RUN conda create -n tf -c conda-forge python=3.6 keras-gpu=2.1.5 tensorflow-gpu numpy scipy scikit-learn scikit-image pandas \
+#RUN conda create -n tf -c conda-forge python=3.6 keras-gpu=2.1.5 tensorflow-gpu numpy scipy scikit-learn scikit-image pandas \
     opencv seaborn jupyter boost pydot tqdm flask numba
 
 # Install tensorflow 1.12.0 from custom wheel file
@@ -99,7 +99,7 @@ RUN wget https://github.com/patrickhuhal/second/releases/download/v1.2-pre/tenso
 # RUN /bin/bash -c "source activate tf && pip install --no-cache-dir horovod"
 
 #USER root
-RUN conda create -n py35 -c conda-forge python=3.5 numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost
+#RUN conda create -n py35 -c conda-forge python=3.5 numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost
 
 # Install CuDNN 7
 RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/ppc64el /" | tee /etc/apt/sources.list.d/cudnn.list && \

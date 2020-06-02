@@ -111,7 +111,6 @@ RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repo
     apt-get install libcudnn7=7.2.1.38-1+cuda9.2 libcudnn7-dev=7.2.1.38-1+cuda9.2
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384:/usr/lib/nvidia-390:/usr/lib/nvidia-396:/usr/lib/powerpc64le-linux-gnu
-in_ppc64le_0.18.1 /bin/bazel
 
 ENV TMP=/tmp
 

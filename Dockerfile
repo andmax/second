@@ -1,13 +1,11 @@
 FROM nvidia/cuda-ppc64le:9.2-devel-ubuntu16.04
 LABEL maintainer "Andre Maximo <andmax@gmail.com>"
 
-ARG CUDA_VERSION=9-2
-
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
         curl \
         python3 \
-		python3-pip \
+	python3-pip \
         gcc \
         g++ \
         gfortran \
@@ -48,11 +46,10 @@ RUN apt-get update -y && \
         tar \
         wget \
         perftest \
-        cuda-samples-${CUDA_VERSION} \
+        cuda-samples-9-2 \
         libnuma-dev \
         qtbase5-dev \
-        qt5-default \
-		openjdk-8-jdk
+        qt5-default
 
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
@@ -116,5 +113,3 @@ ENV TMP=/tmp
 
 # Expose port 22 for local JARVICE emulation in docker
 EXPOSE 22
-
-RUN pip3 install mpi4py

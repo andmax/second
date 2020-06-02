@@ -88,7 +88,7 @@ RUN conda install -c conda-forge boost
 RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 
 #RUN conda create -n tf -c conda-forge python=3.6 keras-gpu=2.1.5 tensorflow-gpu numpy scipy scikit-learn scikit-image pandas \
-    opencv seaborn jupyter boost pydot tqdm flask numba
+#    opencv seaborn jupyter boost pydot tqdm flask numba
 
 # Install tensorflow 1.12.0 from custom wheel file
 #USER nimbix

@@ -1,0 +1,33 @@
+{
+    "name": "Ubuntu 18.04 ppc64le CUDA 10.0",
+    "description": "Ubuntu 18.04 on POWER 8/9 systems with NVIDIA CUDA 10.0", 
+    "author": "Andre Maximo", 
+    "licensed": true, 
+    "classifications": [
+        "Software Development",
+        "Software Testing"
+    ], 
+    "machines": [
+        "*"
+    ],
+    "scale_max": 1,
+    "vault-types": [
+        "FILE", 
+        "BLOCK", 
+        "BLOCK_ARRAY", 
+        "OBJECT"
+    ], 
+    "commands": {
+        "launch": {
+            "path": "/sbin/init", 
+            "interactive": true, 
+            "name": "Launch", 
+            "description": "Launch and connect via SSH", 
+            "parameters": {}
+        }
+    }, 
+    "image": {
+        "data": "iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAOxAAADsQBlSsOGwAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANfSURBVHic7ZlLaFxlFMd/597b4MwkmWmaQpHgo4hiEXwsFCozsTWrbERdqXShoKBxId24UnCr+ATBx8LHQtBY7MaVSiSNEV36oqCgBReB1nbmJpmkydzvuIiRmfQ+5g5Dhzbnt5rvO//vf8535r64FwzDMAzDMAzDMAzDMIzdheRdsHehcJ2qd586DiGyD9GioBecY0nwFkf2rHz/92HW8vpW5q65wQXBtKfuVpCKwpIIv+1pFWfPHjm7ErdmfKF47YbzHgY96MF+ROuo/OHU/zKcDH/vJm/XDSjPl+4HXgRqGdLzir4RRs1XOMJ6lu/o4ugYreg1gWOAFyMJVeSFsLry1vbExCKF5dbwm6BPAH7MGgU+1cCfCQ+H59PyZzfgM/zRA6WXBY5najuM9btow39geWr5nyTN2FxhIvK9r4FbMv1E365Xm8+OL4yPbLq1b4G7uijiFwhqjWrjQpIkruMdlA8Mv5N38wCK3OsPuQ/RhCb/ylDkeyfoYvMAqjJTOVV6fDNa/4huNr9VxG2qrdfTJKlHwOip0jFRPu4qWWICfbBea57cOV+eLz4J8l5OO0cXf9olazS6qTG5/mdcMNlsjkCUl3ImuwRFno4PyDM92OXd/NYaz3s0t2HFK04DN/aQcCdHJxYptE+MzI2MI9zeB++uUCf3JMUSG+A8Odqn/EFjo3BHR9Igup4ebsG9IsLNSbHEBojK3Rm+PwJTqjwGhOkFeAd3zOzN8L4o4h5CeDVDB+hTojyXLqGSFEo5p9z+VFNPZxq11W/CydVPUD5P10q50zrzXF6oV9e+8EU+yNCdadSa79fd6rupKqGYWFrKqrEUS22EzZ//H4ieSc2vOpwWj+EcgJNW7BNgG3WA/x64WjlzAOlX1SAlFjHNxe2BIOlPfJr76q0AoqIZKu0Y9UAvt5Wril3fgLTDPA2/PF/6auunPt+3agZArw0QYAoAJ/uu5OPoCi69P1gDBl3AoLEGDLqAQdPrXSBC5BGAVkt/Coa4s481XVZ6bYA2qiuz24PyfKlP5Vx+dv0pYA0YdAGDZtc3IPEiqMpJkc6XmW1E7QNRPa0iswlaRPR0+9gTlhwk6+EHgNZm0PR8l6hD+KttdIL4r0So5v9UZxiGYRiGYRiGYRiGYVyt/Asb6/ccLvtgHgAAAABJRU5ErkJggg==", 
+        "type": "image/png"
+    }
+}

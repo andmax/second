@@ -92,8 +92,8 @@ RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 
 # Install tensorflow 1.12.0 from custom wheel file
 #USER nimbix
-RUN wget https://github.com/patrickhuhal/second/releases/download/v1.2-pre/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl -P /tmp/ && \
-    /bin/bash -c "source activate tf && pip install --no-cache-dir /tmp/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl"
+#RUN wget https://github.com/patrickhuhal/second/releases/download/v1.2-pre/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl -P /tmp/ && \
+#    /bin/bash -c "source activate tf && pip install --no-cache-dir /tmp/tensorflow-1.12.0-cp36-cp36m-linux_ppc64le.whl"
 
 # Install horovod -- not working yet
 # RUN /bin/bash -c "source activate tf && pip install --no-cache-dir horovod"

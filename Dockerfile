@@ -102,10 +102,10 @@ RUN sudo echo "PATH=/usr/local/anaconda3/bin:$PATH" > /etc/profile.d/anaconda.sh
 #RUN conda create -n py35 -c conda-forge python=3.5 numpy scipy scikit-learn scikit-image pandas opencv seaborn jupyter boost
 
 # Install CuDNN 7
-RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/ppc64el /" | tee /etc/apt/sources.list.d/cudnn.list && \
-    curl -L http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/ppc64el/7fa2af80.pub | apt-key add - && \
-    apt-get update && \
-    apt-get install libcudnn7=7.2.1.38-1+cuda9.2 libcudnn7-dev=7.2.1.38-1+cuda9.2
+#RUN echo "deb http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/ppc64el /" | tee /etc/apt/sources.list.d/cudnn.list && \
+#    curl -L http://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/ppc64el/7fa2af80.pub | apt-key add - && \
+#    apt-get update && \
+#    apt-get install libcudnn7=7.2.1.38-1+cuda9.2 libcudnn7-dev=7.2.1.38-1+cuda9.2
 
 ENV LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib/nvidia-384:/usr/lib/nvidia-390:/usr/lib/nvidia-396:/usr/lib/powerpc64le-linux-gnu
 

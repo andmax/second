@@ -11,9 +11,9 @@ RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools gcc g++ gfortran perl
 RUN apt-get install -y --no-install-recommends numactl libnuma1 libnuma-dev libboost-all-dev cmake-curses-gui cmake-gui make
 RUN apt-get install -y --no-install-recommends pciutils xutils-dev iputils-ping ibverbs-utils debhelper dkms bzip2 tar file hwloc
-RUN apt-get install -y --no-install-recommends ltrace strace libhdf5-dev libgeos-dev libnccl2 libnccl-dev libffi-dev
-RUN apt-get install -y --no-install-recommends graphviz texlive-xetex gnuplot perftest cuda-samples-9-2 qtbase5-dev qt5-default
-RUN apt-get install -y --no-install-recommends libmunge-dev munge libmunge2
+RUN apt-get install -y --no-install-recommends ltrace strace libgeos-dev libnccl2 libnccl-dev libffi-dev graphviz
+RUN apt-get install -y --no-install-recommends texlive-xetex gnuplot perftest cuda-samples-9-2 qtbase5-dev qt5-default
+RUN apt-get install -y --no-install-recommends hdf5-tools libhdf5-dev libmunge-dev munge libmunge2
 RUN apt-get -y clean
 
 RUN cd /usr/local/cuda/samples && make -j32 -k
@@ -45,7 +45,7 @@ ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 RUN pip3 install --upgrade pip
-RUN pip3 install sockets numpy scipy scikit-learn scikit-image pandas seaborn numba 
+RUN pip3 install sockets numpy scikit-learn scikit-image pandas seaborn numba 
 RUN pip3 install opencv pydot boost mpi4py ipython ipyparallel jupyter tqdm flask
 
 ENV SLURM_VERSION=20.02.3

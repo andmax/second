@@ -37,4 +37,4 @@ ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib"
 ENV PATH="${PATH}:/usr/local/bin:/usr/local/openmpi/bin"
 
 RUN pip3 install --upgrade pip
-RUN pip3 install sockets numpy jupyter ipython ipyparallel
+RUN pip3 install jupyter

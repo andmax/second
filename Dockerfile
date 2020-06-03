@@ -2,7 +2,7 @@ FROM nvidia/cuda-ppc64le:9.2-cudnn7-runtime-ubuntu16.04
 LABEL maintainer "Andre Maximo <andmax@gmail.com>"
 
 RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends curl wget htop nano emacs
+RUN apt-get install -y --no-install-recommends curl wget htop nano vim emacs
 RUN apt-get -y clean
 
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash -s
@@ -16,7 +16,7 @@ RUN apt-get install -y --no-install-recommends graphviz texlive-xetex gnuplot pe
 RUN apt-get install -y --no-install-recommends libmunge-dev munge libmunge2
 RUN apt-get -y clean
 
-RUN cd /usr/local/cuda/samples && make -j32 -k ; exit 0
+RUN cd /usr/local/cuda/samples && make -j32 -k
 
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1

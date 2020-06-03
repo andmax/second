@@ -16,7 +16,8 @@ RUN apt-get install -y --no-install-recommends texlive-xetex gnuplot perftest cu
 RUN apt-get install -y --no-install-recommends hdf5-tools libhdf5-dev libmunge-dev munge libmunge2
 RUN apt-get -y clean
 
-RUN cd /usr/local/cuda/samples && make -j32 -k ; exit 0
+RUN cd /usr/local/cuda/samples
+RUN make -j32 -k &> /dev/null ; exit 0
 
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
@@ -27,9 +28,9 @@ RUN tar -x -f /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 -C /var/tmp -j
 RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran \
     ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
-    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs && \
-    make -j32 && \
-    make -j32 install
+    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs
+RUN make -j32 &> /dev/null
+RUN make -j32 install &> /dev/null
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib:/usr/lib/nvidia-410"
@@ -54,7 +55,7 @@ RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/sl
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
 RUN cd /var/tmp/slurm-${SLURM_VERSION} && \
-    ./configure --with-hdf5=no --with-munge=/usr/lib/libmunge.so && \
-    make -j32 && \
-    make -j32 install
+    ./configure --with-hdf5=no --with-munge=/usr/lib/libmunge.so
+RUN make -j32
+RUN make -j32 install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}

@@ -2,16 +2,18 @@ FROM nvidia/cuda-ppc64le:9.2-cudnn7-runtime-ubuntu16.04
 LABEL maintainer "Andre Maximo <andmax@gmail.com>"
 
 RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends wget curl htop nano emacs python3 python3-pip gcc g++ gfortran perl
+RUN apt-get install -y --no-install-recommends curl wget htop nano emacs
 RUN apt-get -y clean
 
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash -s
 
 RUN apt-get update -y
+RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools gcc g++ gfortran perl
 RUN apt-get install -y --no-install-recommends numactl libnuma1 libnuma-dev libboost-all-dev cmake-curses-gui cmake-gui make
 RUN apt-get install -y --no-install-recommends pciutils xutils-dev iputils-ping ibverbs-utils debhelper dkms bzip2 tar file hwloc
 RUN apt-get install -y --no-install-recommends ltrace strace libhdf5-dev libgeos-dev libnccl2 libnccl-dev libffi-dev
-RUN apt-get install -y --no-install-recommends graphviz texlive-xetex gnuplot perftest cuda-samples-9-2 qtbase5-dev qt5-default    
+RUN apt-get install -y --no-install-recommends graphviz texlive-xetex gnuplot perftest cuda-samples-9-2 qtbase5-dev qt5-default
+RUN apt-get install -y --no-install-recommends libmunge-dev munge libmunge2
 RUN apt-get -y clean
 
 ENV OPENMPI_VERS_MAJ=3.1
@@ -35,3 +37,6 @@ RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/j
 
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib"
 ENV PATH="${PATH}:/usr/local/bin:/usr/local/openmpi/bin"
+
+RUN pip3 install --upgrade pip
+RUN pip3 install sockets numpy ipython ipyparallel jupyter

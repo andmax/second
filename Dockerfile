@@ -32,6 +32,9 @@ RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     make -j32 install
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
+ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib:/usr/lib/nvidia-410"
+ENV PATH="${PATH}:/usr/local/bin:/usr/local/openmpi/bin"
+
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
@@ -41,8 +44,17 @@ EXPOSE 22
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib"
-ENV PATH="${PATH}:/usr/local/bin:/usr/local/openmpi/bin"
-
 RUN pip3 install --upgrade pip
-RUN pip3 install sockets numpy ipython ipyparallel jupyter
+RUN pip3 install sockets numpy scipy scikit-learn scikit-image pandas seaborn numba 
+RUN pip3 install opencv pydot boost mpi4py ipython ipyparallel jupyter tqdm flask
+
+ENV SLURM_VERSION=20.02.3
+RUN mkdir -p /var/tmp
+RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
+RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
+RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
+RUN cd /var/tmp/slurm-${SLURM_VERSION} && \
+    ./configure --with-hdf5=no --with-munge=/usr/lib/libmunge.so && \
+    make -j32 && \
+    make -j32 install
+RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}

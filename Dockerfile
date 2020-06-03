@@ -5,7 +5,7 @@ RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends wget curl htop nano emacs python3 python3-pip gcc g++ gfortran perl
 RUN apt-get -y clean
 
-RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash
+RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash -s
 
 RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends numactl libnuma1 libnuma-dev libboost-all-dev cmake-curses-gui cmake-gui make
@@ -17,7 +17,8 @@ RUN apt-get -y clean
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
 RUN mkdir -p /var/tmp
-RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v${OPENMPI_VERS_MAJ}/downloads/openmpi-${OPENMPI_VERS}.tar.bz2
+RUN wget -q -nc --no-check-certificate -P \
+    /var/tmp https://www.open-mpi.org/software/ompi/v${OPENMPI_VERS_MAJ}/downloads/openmpi-${OPENMPI_VERS}.tar.bz2
 RUN tar -x -f /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 -C /var/tmp -j 
 RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran \
@@ -36,6 +37,4 @@ ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib"
 ENV PATH="${PATH}:/usr/local/bin:/usr/local/openmpi/bin"
 
 RUN pip3 install --upgrade pip
-RUN pip3 install sockets numpy jupyter
-RUN pip3 install ipython ipyparallel
-RUN pip3 install mpi4py
+RUN pip3 install sockets numpy jupyter ipython ipyparallel mpi4py

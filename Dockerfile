@@ -16,12 +16,14 @@ RUN apt-get install -y --no-install-recommends graphviz texlive-xetex gnuplot pe
 RUN apt-get install -y --no-install-recommends libmunge-dev munge libmunge2
 RUN apt-get -y clean
 
+RUN cd /usr/local/cuda/samples && make -j32 -k ; exit 0
+
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
 RUN mkdir -p /var/tmp
 RUN wget -q -nc --no-check-certificate -P \
     /var/tmp https://www.open-mpi.org/software/ompi/v${OPENMPI_VERS_MAJ}/downloads/openmpi-${OPENMPI_VERS}.tar.bz2
-RUN tar -x -f /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 -C /var/tmp -j 
+RUN tar -x -f /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 -C /var/tmp -j
 RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran \
     ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
@@ -29,6 +31,10 @@ RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     make -j32 && \
     make -j32 install
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
+
+RUN mkdir -p /workspace
+COPY mpi_bw.c /workspace
+RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
 
 EXPOSE 22
 

@@ -16,7 +16,7 @@ RUN apt-get install -y --no-install-recommends texlive-xetex gnuplot perftest cu
 RUN apt-get install -y --no-install-recommends hdf5-tools libhdf5-dev libmunge-dev munge libmunge2
 RUN apt-get -y clean
 
-RUN cd /usr/local/cuda/samples && make -j32 -k
+RUN cd /usr/local/cuda/samples && make -j32 -k ; exit 0
 
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1

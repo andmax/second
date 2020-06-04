@@ -18,6 +18,16 @@ RUN apt-get -y clean
 
 RUN cd /usr/local/cuda/samples && make -j32 -k &> /dev/null ; exit 0
 
+ENV SLURM_VERSION=20.02.3
+RUN mkdir -p /var/tmp
+RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
+RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
+RUN tar -j -x -f -C /var/tmp /var/tmp/slurm-${SLURM_VERSION}.tar.bz2
+RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-munge=/usr/lib/libmunge.so && make -j32 && make -j32 install
+RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
+
+RUN apt-get -y autoremove --purge openmpi-bin
+
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
 RUN mkdir -p /var/tmp
@@ -35,22 +45,18 @@ RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_V
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib:/usr/lib/nvidia-410"
 ENV PATH="${PATH}:/usr/local/bin:/usr/local/openmpi/bin"
 
+RUN apt-get update -y
+RUN apt-get install -y --no-install-recommends libboost-all-dev
+RUN apt-get -y clean
+
+RUN pip3 install --upgrade pip
+RUN pip3 install sockets numpy mpi4py ipython ipyparallel jupyter
+
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
 
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
-
-RUN pip3 install --upgrade pip
-RUN pip3 install sockets numpy mpi4py ipython ipyparallel jupyter
-
-ENV SLURM_VERSION=20.02.3
-RUN mkdir -p /var/tmp
-RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
-RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
-RUN tar -j -x -f -C /var/tmp /var/tmp/slurm-${SLURM_VERSION}.tar.bz2
-RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-munge=/usr/lib/libmunge.so && make -j32 && make -j32 install
-RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
 
 EXPOSE 22

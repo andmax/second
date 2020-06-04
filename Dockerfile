@@ -7,12 +7,11 @@ RUN apt-get -y clean
 
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash -s
 
-#libboost-dev libboost-serialization-dev
 RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends \
     python3 python3-dev python3-pip python3-setuptools gcc g++ gfortran cmake-curses-gui cmake-gui make \
     numactl libnuma1 libnuma-dev libnccl-dev libffi-dev libgeos-dev qtbase5-dev qt5-default perftest perl \
-    libbz2-dev autotools-dev libicu-dev build-essential libboost-all-dev \
+    libbz2-dev autotools-dev libicu-dev build-essential libboost-dev libboost-serialization-dev \
     pciutils xutils-dev iputils-ping ibverbs-utils debhelper dkms bzip2 hwloc ltrace strace libnccl2 \
     graphviz texlive-xetex gnuplot cuda-samples-9-2 hdf5-tools libhdf5-dev libmunge-dev munge libmunge2
 RUN apt-get -y clean
@@ -44,7 +43,7 @@ ENV SLURM_VERSION=20.02.3
 RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
-RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-munge=/usr/lib/libmunge.so && \
+RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-hdf5=no --with-munge=/usr/lib/libmunge.so && \
     make -j"$(nproc)" && \
     make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}

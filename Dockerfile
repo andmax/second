@@ -21,9 +21,9 @@ RUN cd /usr/local/cuda/samples && make -j32 -k &> /dev/null ; exit 0
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
 RUN mkdir -p /var/tmp
-RUN wget -q -nc --no-check-certificate -P \
-    /var/tmp https://www.open-mpi.org/software/ompi/v${OPENMPI_VERS_MAJ}/downloads/openmpi-${OPENMPI_VERS}.tar.bz2
-RUN tar -x -f /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 -C /var/tmp -j
+RUN wget -q -nc --no-check-certificate -P /var/tmp \
+    https://www.open-mpi.org/software/ompi/v${OPENMPI_VERS_MAJ}/downloads/openmpi-${OPENMPI_VERS}.tar.bz2
+RUN tar -j -x -f -C /var/tmp /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2
 RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran \
     ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
@@ -49,7 +49,7 @@ ENV SLURM_VERSION=20.02.3
 RUN mkdir -p /var/tmp
 RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
-RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
+RUN tar -j -x -f -C /var/tmp /var/tmp/slurm-${SLURM_VERSION}.tar.bz2
 RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-munge=/usr/lib/libmunge.so && make -j32 && make -j32 install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
 

@@ -16,6 +16,7 @@ RUN apt-get install -y --no-install-recommends \
     graphviz texlive-xetex gnuplot cuda-samples-9-2 hdf5-tools libhdf5-dev libmunge-dev munge libmunge2
 RUN apt-get -y clean
 
+ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH
 RUN cd /usr/local/cuda/samples && make -j"$(nproc)" -k &> /dev/null ; exit 0
 
 RUN mkdir -p /var/tmp
@@ -35,8 +36,8 @@ RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     ldconfig
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
-ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib:/usr/lib/nvidia-410"
-ENV PATH="${PATH}:/usr/local/bin:/usr/local/openmpi/bin"
+ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH \
+    PATH=/usr/local/openmpi/bin:$PATH
 
 ENV SLURM_VERSION=20.02.3
 RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
@@ -47,6 +48,8 @@ RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-munge=/usr/lib/libm
     make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
 
+RUN apt-get -y autoremove
+RUN apt-get -y autoclean
 RUN pip3 install --upgrade pip
 RUN pip3 install sockets numpy mpi4py ipython ipyparallel jupyter
 

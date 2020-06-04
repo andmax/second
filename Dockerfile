@@ -45,9 +45,9 @@ RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_V
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib:/usr/lib/nvidia-410"
 ENV PATH="${PATH}:/usr/local/bin:/usr/local/openmpi/bin"
 
-RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends libboost-all-dev
-RUN apt-get -y clean
+#RUN apt-get update -y
+#RUN apt-get install -y --no-install-recommends libboost-all-dev
+#RUN apt-get -y clean
 
 RUN pip3 install --upgrade pip
 RUN pip3 install sockets numpy mpi4py ipython ipyparallel jupyter

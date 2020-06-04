@@ -48,6 +48,10 @@ RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-hdf5=no --with-mung
     make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
 
+RUN touch /var/spool/slurm/ctld/node_state /var/spool/slurm/ctld/job_state \
+    /var/spool/slurm/ctld/resv_state /var/spool/slurm/ctld/trigger_state \
+    /var/run/slurm/slurmctld.pid /var/run/slurm/slurmd.pid
+
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
 RUN pip3 install --upgrade pip

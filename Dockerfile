@@ -61,21 +61,15 @@ RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
 
 RUN echo "/data/inglib/power8/bin" >> /etc/ld.so.conf.d/ibf.conf && ldconfig
 
-RUN echo $'\n\
-if [[ $(ps aux | grep -E "slurmctld|slurmd" | grep -vc grep) > 0 ]]; then \n\
-    scontrol -o show nodes \n\
-    sinfo -o "%23N %10c %10m %20C %33G %10A %25E" \n\
-    squeue -o  "%.18i %.9P %.16j %.8u %.2t %.10M %.6D %23R %8C %33b" \n\
-else \n\
-    echo "SLURM is not running"
-fi ' >> /usr/local/bin/status_slurm.sh
-
+COPY slurm/status_slurm.sh /usr/local/bin/status_slurm.sh
 COPY slurm/start_slurm.sh /usr/local/bin/start_slurm.sh
+COPY slurm/stop_slurm.sh /usr/local/bin/stop_slurm.sh
 COPY slurm/base_slurm.conf /usr/local/etc/base_slurm.conf
 COPY slurm/gres.conf /usr/local/etc/gres.conf
 
 RUN chmod a+rx /usr/local/bin/status_slurm.sh
 RUN chmod a+rx /usr/local/bin/start_slurm.sh
+RUN chmod a+rx /usr/local/bin/stop_slurm.sh
 
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -

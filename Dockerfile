@@ -46,8 +46,7 @@ ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 RUN pip3 install --upgrade pip
-RUN pip3 install sockets numpy scikit-learn pandas seaborn numba 
-RUN pip3 install opencv pydot boost mpi4py ipython ipyparallel jupyter tqdm flask
+RUN pip3 install sockets numpy mpi4py ipython ipyparallel jupyter
 
 ENV SLURM_VERSION=20.02.3
 RUN mkdir -p /var/tmp

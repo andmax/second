@@ -36,7 +36,7 @@ RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     ldconfig
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
-RUN echo "/usr/local/openmpi/bin" >> /etc/environment
+RUN echo "export PATH=/usr/local/openmpi/bin:$PATH" >> /etc/profile.d/openmpi.sh
 
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH \
     PATH=/usr/local/openmpi/bin:$PATH

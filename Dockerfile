@@ -36,7 +36,7 @@ RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     ldconfig
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
-RUN echo "export PATH=/usr/local/openmpi/bin:$PATH" >> /etc/profile.d/openmpi.sh
+RUN echo "export PATH=/usr/local/openmpi/bin:\$PATH" >> /etc/profile.d/openmpi.sh
 
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH \
     PATH=/usr/local/openmpi/bin:$PATH
@@ -49,10 +49,6 @@ RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-hdf5=no --with-mung
     make -j"$(nproc)" && \
     make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
-
-RUN touch /var/spool/slurm/ctld/node_state /var/spool/slurm/ctld/job_state \
-    /var/spool/slurm/ctld/resv_state /var/spool/slurm/ctld/trigger_state \
-    /var/run/slurm/slurmctld.pid /var/run/slurm/slurmd.pid
 
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean

@@ -9,7 +9,7 @@ RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/i
 
 RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools gcc g++ gfortran perl
-RUN apt-get install -y --no-install-recommends numactl libnuma1 libnuma-dev libboost-all-dev cmake-curses-gui cmake-gui make
+RUN apt-get install -y --no-install-recommends numactl libnuma1 libnuma-dev libboost-dev cmake-curses-gui cmake-gui make
 RUN apt-get install -y --no-install-recommends pciutils xutils-dev iputils-ping ibverbs-utils debhelper dkms bzip2 tar file hwloc
 RUN apt-get install -y --no-install-recommends ltrace strace libgeos-dev libnccl2 libnccl-dev libffi-dev graphviz
 RUN apt-get install -y --no-install-recommends texlive-xetex gnuplot perftest cuda-samples-9-2 qtbase5-dev qt5-default
@@ -27,8 +27,6 @@ RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
 RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-munge=/usr/lib/libmunge.so && make -j32 && make -j32 install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
 
-RUN apt-get -y autoremove --purge openmpi-bin
-
 ENV OPENMPI_VERS_MAJ=3.1
 ENV OPENMPI_VERS=${OPENMPI_VERS_MAJ}.1
 RUN wget -q -nc --no-check-certificate -P /var/tmp \
@@ -44,10 +42,6 @@ RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_V
 
 ENV LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:/usr/local/lib:/usr/local/openmpi/lib:/usr/lib/nvidia-410"
 ENV PATH="${PATH}:/usr/local/bin:/usr/local/openmpi/bin"
-
-#RUN apt-get update -y
-#RUN apt-get install -y --no-install-recommends libboost-all-dev
-#RUN apt-get -y clean
 
 RUN pip3 install --upgrade pip
 RUN pip3 install sockets numpy mpi4py ipython ipyparallel jupyter

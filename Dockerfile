@@ -74,6 +74,7 @@ RUN chmod a+rx /usr/local/bin/stop_slurm.sh
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
-EXPOSE 22
+RUN ln -s /usr/local/bin/start_slurm.sh /etc/init.d/start_slurm
+RUN update-rc.d start_slurm defaults
 
-CMD sudo /usr/local/bin/start_slurm.sh
+EXPOSE 22

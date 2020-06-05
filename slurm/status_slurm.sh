@@ -7,10 +7,12 @@
 
 if [[ $(ps aux | grep -E "slurmctld|slurmd" | grep -vc grep) > 0 ]]
 then
-  scontrol -o show nodes
-  sinfo -o "%23N %10c %10m %20C %33G %10A %25E"
-  squeue -o  "%.18i %.9P %.16j %.8u %.2t %.10M %.6D %23R %8C %33b"
+    seq -s . 120|tr -d '[:digit:]'
+    scontrol -o show nodes
+    seq -s . 120|tr -d '[:digit:]'
+    sinfo -o "%23N %10c %10m %20C %33G %10A %25E"
+    seq -s . 120|tr -d '[:digit:]'
+    squeue -o  "%.8i %.9P %.16j %.8u %.2t %.10M %.6D %23R %8C %33b"
 else
     echo "SLURM is not running"
 fi
-

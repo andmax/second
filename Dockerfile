@@ -64,6 +64,7 @@ RUN echo "/data/inglib/power8/bin" >> /etc/ld.so.conf.d/ibf.conf && ldconfig
 COPY slurm/status_slurm.sh /usr/local/bin/status_slurm.sh
 COPY slurm/start_slurm.sh /usr/local/bin/start_slurm.sh
 COPY slurm/stop_slurm.sh /usr/local/bin/stop_slurm.sh
+
 COPY slurm/base_slurm.conf /usr/local/etc/base_slurm.conf
 COPY slurm/gres.conf /usr/local/etc/gres.conf
 
@@ -76,5 +77,8 @@ RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/j
 
 RUN ln -s /usr/local/bin/start_slurm.sh /etc/init.d/start_slurm
 RUN update-rc.d start_slurm defaults
+
+RUN ln -s /data/andmax/all_create_user.sh /etc/init.d/all_create_user
+RUN update-rc.d all_create_user defaults
 
 EXPOSE 22

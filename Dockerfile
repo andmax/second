@@ -78,7 +78,8 @@ RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/j
 RUN ln -s /usr/local/bin/start_slurm.sh /etc/init.d/start_slurm
 RUN update-rc.d start_slurm defaults
 
-RUN echo -e "#!/bin/bash\n/data/andmax/all_create_user.sh" > /etc/init.d/all_create_user.sh
+RUN echo "/data/andmax/all_create_user.sh" > /etc/init.d/all_create_user.sh
+RUN chmod a+rx /etc/init.d/all_create_user.sh
 RUN update-rc.d all_create_user.sh defaults
 
 EXPOSE 22

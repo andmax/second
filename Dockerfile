@@ -53,7 +53,7 @@ RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSIO
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
 RUN pip3 install --upgrade pip
-RUN pip3 install sockets numpy mpi4py ipython ipyparallel install six jsonschema \
+RUN pip3 install sockets numpy mpi4py ipython ipyparallel six jsonschema \
     jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator nbzip
 
 RUN mkdir -p /workspace

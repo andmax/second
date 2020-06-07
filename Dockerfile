@@ -11,9 +11,9 @@ RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends \
     python3 python3-dev python3-pip python3-setuptools gcc g++ gfortran cmake-curses-gui cmake-gui make \
     numactl libnuma1 libnuma-dev libnccl-dev libffi-dev libgeos-dev qtbase5-dev qt5-default perftest perl \
-    libbz2-dev autotools-dev libicu-dev build-essential libboost-dev libboost-serialization-dev \
-    pciutils xutils-dev iputils-ping ibverbs-utils debhelper dkms bzip2 hwloc ltrace strace libnccl2 \
-    graphviz texlive-xetex gnuplot cuda-samples-9-2 hdf5-tools libhdf5-dev libmunge-dev munge libmunge2
+    libbz2-dev autotools-dev libicu-dev build-essential libboost-dev libboost-serialization-dev graphviz \
+    pciutils xutils-dev iputils-ping ibverbs-utils debhelper dkms bzip2 hwloc ltrace strace libnccl2 gnuplot \
+    texlive-xetex cuda-samples-9-2 hdf5-tools libhdf5-dev libmunge-dev munge libmunge2 libxml2-dev libxslt-dev
 RUN apt-get -y clean
 
 ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH
@@ -53,11 +53,12 @@ RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSIO
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
 RUN pip3 install --upgrade pip
-RUN pip3 install sockets numpy mpi4py ipython ipyparallel jupyter nbzip
+RUN pip3 install sockets numpy mpi4py ipython ipyparallel six jsonschema \
+    jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator nbzip
 
+RUN jupyter contrib nbextension install
 RUN jupyter serverextension enable --py nbzip --sys-prefix
 RUN jupyter nbextension install --py nbzip
-RUN jupyter nbextension enable --py nbzip
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

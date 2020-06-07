@@ -56,9 +56,6 @@ RUN pip3 install --upgrade pip
 RUN pip3 install sockets numpy mpi4py ipython ipyparallel install six jsonschema \
     jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator nbzip
 
-RUN jupyter serverextension enable --py nbzip --sys-prefix
-RUN jupyter nbextension install --py nbzip
-
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c

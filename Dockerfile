@@ -54,11 +54,9 @@ RUN apt-get -y autoremove
 RUN apt-get -y autoclean
 RUN pip3 install --upgrade pip
 RUN pip3 install sockets numpy mpi4py ipython ipyparallel jsonschema six==1.11 \
-    jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator nbzip
+    jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator
 
 RUN jupyter contrib nbextension install
-RUN jupyter serverextension enable --py nbzip --sys-prefix
-RUN jupyter nbextension install --py nbzip
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

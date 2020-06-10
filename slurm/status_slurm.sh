@@ -12,7 +12,12 @@ then
     seq -s . 120|tr -d '[:digit:]'
     sinfo -o "%23N %10c %10m %20C %33G %10A %25E"
     seq -s . 120|tr -d '[:digit:]'
-    squeue -o  "%.8i %.9P %.16j %.8u %.2t %.10M %.6D %23R %8C %33b"
+    squeue -o  "%.8i %.9P %.16j %.8u %.2t %.10M %.5D %23R %5C %10m %13b"
+    if [ $UID -eq 0 -o $UID -eq 505 ]
+    then
+        seq -s . 120|tr -d '[:digit:]'
+        sudo sacct --format=jobid,jobname,user,account,partition,ntasks,alloccpus,elapsed,state,exitcode
+    fi
 else
     echo "SLURM is not running"
 fi

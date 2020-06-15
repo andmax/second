@@ -12,7 +12,7 @@ then
     seq -s . 120|tr -d '[:digit:]'
     sinfo -o "%23N %10c %10m %20C %33G %10A %25E"
     seq -s . 120|tr -d '[:digit:]'
-    squeue -o  "%.8i %.9P %.16j %.8u %.2t %.10M %.5D %23R %5C %10m %13b"
+    squeue -o  "%.5i %.9P %.9j %.8u %.2t %.6M %.5D %23R %4C %10m %29b"
     if [ $UID -eq 0 -o $UID -eq 505 ]
     then
         seq -s . 120|tr -d '[:digit:]'

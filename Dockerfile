@@ -14,7 +14,7 @@ RUN apt-get install -y --no-install-recommends \
     libbz2-dev autotools-dev libicu-dev build-essential libboost-dev libboost-serialization-dev graphviz \
     pciutils xutils-dev iputils-ping ibverbs-utils debhelper dkms bzip2 hwloc ltrace strace libnccl2 gnuplot \
     texlive-xetex cuda-samples-9-2 hdf5-tools libhdf5-dev libmunge-dev munge libmunge2 libxml2-dev libxslt-dev \
-    libfreetype6-dev pkg-config libpng12-dev
+    libfreetype6-dev pkg-config libpng12-dev libopenblas-dev liblapack-dev
 RUN apt-get -y clean
 
 ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH

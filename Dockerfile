@@ -13,7 +13,8 @@ RUN apt-get install -y --no-install-recommends \
     numactl libnuma1 libnuma-dev libnccl-dev libffi-dev libgeos-dev qtbase5-dev qt5-default perftest perl \
     libbz2-dev autotools-dev libicu-dev build-essential libboost-dev libboost-serialization-dev graphviz \
     pciutils xutils-dev iputils-ping ibverbs-utils debhelper dkms bzip2 hwloc ltrace strace libnccl2 gnuplot \
-    texlive-xetex cuda-samples-9-2 hdf5-tools libhdf5-dev libmunge-dev munge libmunge2 libxml2-dev libxslt-dev
+    texlive-xetex cuda-samples-9-2 hdf5-tools libhdf5-dev libmunge-dev munge libmunge2 libxml2-dev libxslt-dev \
+    libfreetype6-dev pkg-config libpng12-dev
 RUN apt-get -y clean
 
 ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH
@@ -53,7 +54,8 @@ RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSIO
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
 RUN pip3 install --upgrade pip
-RUN pip3 install pygraphml sockets numpy mpi4py ipython ipyparallel jsonschema six==1.11 \
+RUN pip3 install pygraphml matplotlib scipy sockets numpy \
+    mpi4py ipython ipyparallel jsonschema six==1.11 \
     jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator
 
 RUN jupyter contrib nbextension install

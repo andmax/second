@@ -13,11 +13,7 @@ RUN apt-get install -y --no-install-recommends bzip2 hwloc ltrace strace libnccl
 RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev
 RUN apt-get install -y --no-install-recommends libboost-dev libboost-serialization-dev xutils-dev qtbase5-dev qt5-default
 # RUN apt-get install -y --no-install-recommends libjpeg-turbo8-dev=1.4.2-0ubuntu3 libhdf5-dev
-RUN apt-get install -y --no-install-recommends libxslt-dev
-RUN apt-get install -y --no-install-recommends libmunge-dev
-RUN apt-get install -y --no-install-recommends libxml2-dev
-RUN apt-get install -y --no-install-recommends libopenblas-dev
-RUN apt-get install -y --no-install-recommends liblapack-dev
+RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
 RUN apt-get install -y --no-install-recommends libnuma-dev libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev
 RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools cuda-samples-9-2
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
@@ -60,8 +56,9 @@ RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSIO
 
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
-RUN pip3 install --upgrade pip
-RUN pip3 install pygraphml matplotlib scipy pandas numpy \
+RUN pip3 install --upgrade pip setuptools
+RUN pip3 install matplotlib==1.5.3
+RUN pip3 install pygraphml scipy pandas numpy \
     mpi4py sockets ipython ipyparallel jsonschema six==1.11 \
     jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator
 

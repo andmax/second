@@ -8,7 +8,7 @@ RUN apt-get -y clean
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash -s
 
 RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends \
+RUN apt-get install -y --no-install-recommends --fix-missing \
     python3 python3-dev python3-pip python3-setuptools gcc g++ gfortran cmake-curses-gui cmake-gui make \
     numactl libnuma1 libnuma-dev libnccl-dev libffi-dev libgeos-dev qtbase5-dev qt5-default perftest perl \
     libbz2-dev autotools-dev libicu-dev build-essential libboost-dev libboost-serialization-dev graphviz \

@@ -12,11 +12,13 @@ RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-e
 RUN apt-get install -y --no-install-recommends bzip2 hwloc ltrace strace libnccl2 hdf5-tools munge libmunge2 numactl libnuma1
 RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev
 RUN apt-get install -y --no-install-recommends libboost-dev libboost-serialization-dev xutils-dev qtbase5-dev qt5-default
-RUN apt-get install -y --no-install-recommends libhdf5-dev libmunge-dev libxml2-dev libxslt-dev libopenblas-dev liblapack-dev
+RUN apt-get install -y --no-install-recommends libhdf5-dev libmunge-dev libxml2-dev libxslt-dev
 RUN apt-get install -y --no-install-recommends libnuma-dev libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev
 RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools cuda-samples-9-2
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
 RUN apt-get install -y --no-install-recommends libpng12-dev
+RUN apt-get install -y --no-install-recommends libjpeg-dev
+RUN apt-get install -y --no-install-recommends libopenblas-dev liblapack-dev
 RUN apt-get -y clean
 
 ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH

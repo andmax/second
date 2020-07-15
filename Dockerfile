@@ -64,11 +64,12 @@ RUN apt-get -y autoclean
 
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
-RUN /usr/local/anaconda3/bin/conda install -c conda-forge boost numpy mpi4py ipyparallel pygraphml
-RUN /usr/local/anaconda3/bin/conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
-RUN /usr/local/anaconda3/bin/conda install -c conda-forge six jsonschema ipython jupyter nb_conda
+RUN /usr/local/anaconda3/bin/conda shell.bash hook
+RUN conda init
 
-RUN echo "eval \$(/usr/local/anaconda3/bin/conda shell.bash hook)\n/usr/local/anaconda3/bin/conda init" >> /etc/profile.d/anaconda.sh
+RUN conda install -c conda-forge boost numpy mpi4py ipyparallel pygraphml
+RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
+RUN conda install -c conda-forge six jsonschema ipython jupyter nb_conda
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

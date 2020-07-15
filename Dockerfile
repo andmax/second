@@ -69,7 +69,7 @@ RUN /usr/local/anaconda3/bin/conda install -c conda-forge six jsonschema ipython
 
 RUN echo "eval \$(/usr/local/anaconda3/bin/conda shell.bash hook)\nconda init" >> /etc/profile.d/anaconda.sh
 
-RUN jupyter contrib nbextension install
+RUN /usr/local/anaconda3/bin/jupyter contrib nbextension install
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

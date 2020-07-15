@@ -94,10 +94,10 @@ ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 RUN ln -s /usr/local/bin/start_slurm.sh /etc/init.d/start_slurm
-RUN update-rc.d start_slurm defaults
+RUN update-rc.d start_slurm enable 3
 
 RUN echo "#!/bin/bash\n/data/andmax/all_create_user.sh\n/data/andmax/all_start_jupyter.sh" > /etc/init.d/all_up.sh
 RUN chmod a+rx /etc/init.d/all_up.sh
-RUN update-rc.d all_up.sh defaults
+RUN update-rc.d all_up.sh enable 3
 
 EXPOSE 22

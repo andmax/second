@@ -64,7 +64,8 @@ RUN apt-get -y autoclean
 
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
-RUN /usr/local/anaconda3/bin/conda shell.bash hook
+ENV PATH /usr/local/anaconda3/bin:$PATH
+RUN conda shell.bash hook
 RUN conda init
 
 RUN conda install -c conda-forge boost numpy mpi4py ipyparallel pygraphml

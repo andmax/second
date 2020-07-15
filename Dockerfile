@@ -8,14 +8,13 @@ RUN apt-get -y clean
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash -s
 
 RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential pciutils iputils-ping ibverbs-utils
-RUN apt-get install -y --no-install-recommends bzip2 hwloc ltrace strace libnccl2 hdf5-tools munge libmunge2 numactl libnuma1
+RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential pciutils iputils-ping apt-utils
+RUN apt-get install -y --no-install-recommends ibverbs-utils bzip2 hwloc ltrace strace libnccl2 hdf5-tools munge libmunge2
 RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev
-RUN apt-get install -y --no-install-recommends libboost-all-dev
-RUN apt-get install -y --no-install-recommends libboost-dev libboost-serialization-dev xutils-dev qtbase5-dev qt5-default
+RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbase5-dev qt5-default numactl libnuma1
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
 RUN apt-get install -y --no-install-recommends libnuma-dev libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev
-RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest libpng12-dev
+RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest libpng12-dev 
 #RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools
 RUN apt-get install -y --no-install-recommends cuda-samples-9-2
 RUN apt-get -y clean
@@ -64,9 +63,9 @@ RUN apt-get -y autoclean
 
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
-RUN conda install -c conda-forge boost numpy mpi4py ipyparallel pygraphml
-RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
-RUN conda install -c conda-forge six jsonschema ipython jupyter nb_conda
+RUN /usr/local/anaconda3/bin/conda install -c conda-forge boost numpy mpi4py ipyparallel pygraphml
+RUN /usr/local/anaconda3/bin/conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
+RUN /usr/local/anaconda3/bin/conda install -c conda-forge six jsonschema ipython jupyter nb_conda
 
 RUN echo "eval \$(/usr/local/anaconda3/bin/conda shell.bash hook)\nconda init" >> /etc/profile.d/anaconda.sh
 

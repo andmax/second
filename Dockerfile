@@ -2,19 +2,20 @@ FROM nvidia/cuda-ppc64le:9.2-cudnn7-runtime-ubuntu16.04
 LABEL maintainer="andmax@gmail.com"
 
 RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends curl wget tar file htop nano vim emacs
+RUN apt-get install -y --no-install-recommends curl wget tar bzip2 file htop nano vim emacs
 RUN apt-get -y clean
 
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash -s
 
 RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential pciutils iputils-ping apt-utils
-RUN apt-get install -y --no-install-recommends ibverbs-utils bzip2 hwloc ltrace strace libnccl2 hdf5-tools munge libmunge2
+RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential software-properties-common
+RUN apt-get install -y --no-install-recommends pciutils iputils-ping apt-utils hwloc ltrace strace ibverbs-utils libnccl2
 RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev
-RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbase5-dev qt5-default numactl libnuma1
+RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbase5-dev qt5-default numactl libnuma1 libnuma-dev
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
-RUN apt-get install -y --no-install-recommends libnuma-dev libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev
-RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest libpng12-dev 
+RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
+RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
+RUN apt-get install -y --no-install-recommends libpng12-dev munge libmunge2 hdf5-tools
 #RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools
 RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
 RUN apt-get -y clean
@@ -94,10 +95,10 @@ ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 RUN ln -s /usr/local/bin/start_slurm.sh /etc/init.d/start_slurm
-RUN update-rc.d start_slurm start 99 3
+RUN update-rc.d start_slurm defaults
 
 RUN echo "#!/bin/bash\nsource /etc/profile.d/conda.sh\n/data/andmax/all_create_user.sh\n/data/andmax/all_start_jupyter.sh" > /etc/init.d/all_up.sh
 RUN chmod a+rx /etc/init.d/all_up.sh
-RUN update-rc.d all_up.sh start 99 3
+RUN update-rc.d all_up.sh defaults
 
 EXPOSE 22

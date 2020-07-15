@@ -16,7 +16,7 @@ RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-
 RUN apt-get install -y --no-install-recommends libnuma-dev libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest libpng12-dev 
 #RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools
-RUN apt-get install -y --no-install-recommends cuda-samples-9-2
+RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
 RUN apt-get -y clean
 
 ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH

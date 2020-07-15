@@ -60,6 +60,7 @@ RUN apt-get -y autoclean
 #RUN pip3 install matplotlib pygraphml scipy pandas numpy \
 #    mpi4py sockets ipython ipyparallel jsonschema six==1.11 \
 #    jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator
+#RUN jupyter contrib nbextension install
 
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
@@ -68,8 +69,6 @@ RUN /usr/local/anaconda3/bin/conda install -c conda-forge pandas matplotlib scip
 RUN /usr/local/anaconda3/bin/conda install -c conda-forge six jsonschema ipython jupyter nb_conda
 
 RUN echo "eval \$(/usr/local/anaconda3/bin/conda shell.bash hook)\nconda init" >> /etc/profile.d/anaconda.sh
-
-RUN /usr/local/anaconda3/bin/jupyter contrib nbextension install
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

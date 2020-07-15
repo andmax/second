@@ -11,11 +11,13 @@ RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential pciutils iputils-ping ibverbs-utils
 RUN apt-get install -y --no-install-recommends bzip2 hwloc ltrace strace libnccl2 hdf5-tools munge libmunge2 numactl libnuma1
 RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev
+RUN apt-get install -y --no-install-recommends libboost-all-dev
 RUN apt-get install -y --no-install-recommends libboost-dev libboost-serialization-dev xutils-dev qtbase5-dev qt5-default
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
 RUN apt-get install -y --no-install-recommends libnuma-dev libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev
-RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools cuda-samples-9-2
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest libpng12-dev
+#RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools
+RUN apt-get install -y --no-install-recommends cuda-samples-9-2
 RUN apt-get -y clean
 
 ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH
@@ -54,10 +56,19 @@ RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSIO
 
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
-RUN pip3 install --upgrade pip setuptools
-RUN pip3 install matplotlib pygraphml scipy pandas numpy \
-    mpi4py sockets ipython ipyparallel jsonschema six==1.11 \
-    jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator
+
+#RUN pip3 install --upgrade pip setuptools
+#RUN pip3 install matplotlib pygraphml scipy pandas numpy \
+#    mpi4py sockets ipython ipyparallel jsonschema six==1.11 \
+#    jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator
+
+RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
+RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
+RUN conda install -c conda-forge boost numpy mpi4py ipyparallel pygraphml
+RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
+RUN conda install -c conda-forge six jsonschema ipython jupyter nb_conda
+
+RUN echo "eval \$(/usr/local/anaconda3/bin/conda shell.bash hook)\nconda init" >> /etc/profile.d/anaconda.sh
 
 RUN jupyter contrib nbextension install
 

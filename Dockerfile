@@ -68,7 +68,7 @@ RUN /usr/local/anaconda3/bin/conda install -c conda-forge boost numpy mpi4py ipy
 RUN /usr/local/anaconda3/bin/conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
 RUN /usr/local/anaconda3/bin/conda install -c conda-forge six jsonschema ipython jupyter nb_conda
 
-RUN echo "eval \$(/usr/local/anaconda3/bin/conda shell.bash hook)\nconda init" >> /etc/profile.d/anaconda.sh
+RUN echo "eval \$(/usr/local/anaconda3/bin/conda shell.bash hook)\n/usr/local/anaconda3/bin/conda init" >> /etc/profile.d/anaconda.sh
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

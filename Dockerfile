@@ -67,10 +67,11 @@ RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
 ENV PATH /usr/local/anaconda3/bin:$PATH
 #RUN eval "$(/usr/local/anaconda3/bin/conda shell.bash hook)"
 RUN conda init --system
+RUN conda update conda
 
 RUN conda install -c conda-forge boost numpy mpi4py ipyparallel pygraphml
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
-RUN conda install -c conda-forge six jsonschema ipython jupyter nb_conda
+RUN conda install -c conda-forge six jsonschema ipython jupyter
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

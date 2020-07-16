@@ -97,7 +97,14 @@ RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/j
 RUN ln -s /usr/local/bin/start_slurm.sh /etc/init.d/start_slurm
 RUN update-rc.d start_slurm defaults
 
-RUN echo "#!/bin/bash\nsource /etc/profile.d/conda.sh\n/data/snail/slurm_nimbix/all_create_user.sh\n/data/snail/slurm_nimbix/all_start_jupyter.sh" > /etc/init.d/all_up.sh
+RUN echo "\
+#!/bin/bash\n\
+source /etc/profile.d/conda.sh\n\
+/data/snail/slurm_nimbix/all_create_user.sh\n\
+/data/snail/slurm_nimbix/all_start_jupyter.sh\n\
+sudo cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/* \
+/usr/local/anaconda3/lib/python3.7/site-packages/\n
+" > /etc/init.d/all_up.sh
 RUN chmod a+rx /etc/init.d/all_up.sh
 RUN update-rc.d all_up.sh defaults
 

@@ -99,10 +99,10 @@ RUN echo "\
 source /etc/profile.d/conda.sh\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
-sudo cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/* \
+sudo cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/IbfExt* \
 /usr/local/anaconda3/lib/python3.7/site-packages/\n\
-sudo /usr/local/bin/start_slurm.sh" > /etc/init.d/all_up.sh
-RUN chmod a+rx /etc/init.d/all_up.sh
-RUN update-rc.d all_up.sh defaults
+sudo /usr/local/bin/start_slurm.sh" > /usr/local/bin/all_up.sh
+RUN chmod a+rx /usr/local/bin/all_up.sh
+RUN sed -i -e '$i /usr/local/bin/all_up.sh\n' /etc/rc.local
 
 EXPOSE 22

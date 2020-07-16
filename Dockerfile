@@ -87,8 +87,6 @@ COPY slurm/stop_slurm.sh /usr/local/bin/stop_slurm.sh
 COPY slurm/base_slurm.conf /usr/local/etc/base_slurm.conf
 COPY slurm/gres.conf /usr/local/etc/gres.conf
 
-COPY slurm/all_up.service /etc/systemd/system/all_up.service
-
 RUN chmod a+rx /usr/local/bin/status_slurm.sh
 RUN chmod a+rx /usr/local/bin/start_slurm.sh
 RUN chmod a+rx /usr/local/bin/stop_slurm.sh
@@ -105,6 +103,6 @@ sudo cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/* \
 /usr/local/anaconda3/lib/python3.7/site-packages/\n\
 sudo /usr/local/bin/start_slurm.sh" > /etc/init.d/all_up.sh
 RUN chmod a+rx /etc/init.d/all_up.sh
-RUN update-rc.d all_up defaults
+RUN update-rc.d all_up.sh defaults
 
 EXPOSE 22

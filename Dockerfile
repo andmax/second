@@ -96,7 +96,6 @@ RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/j
 
 RUN echo "\
 #!/bin/bash\n\
-source /etc/profile.d/conda.sh\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
 sudo cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/IbfExt* \

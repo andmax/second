@@ -103,8 +103,7 @@ source /etc/profile.d/conda.sh\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
 sudo cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/* \
-/usr/local/anaconda3/lib/python3.7/site-packages/\n
-" > /etc/init.d/all_up.sh
+/usr/local/anaconda3/lib/python3.7/site-packages/\n" > /etc/init.d/all_up.sh
 RUN chmod a+rx /etc/init.d/all_up.sh
 RUN update-rc.d all_up.sh defaults
 

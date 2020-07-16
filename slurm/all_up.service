@@ -1,0 +1,6 @@
+[Unit]
+Description=All up
+
+[Service]
+User=nimbix
+ExecStart=/usr/local/bin/all_up.sh

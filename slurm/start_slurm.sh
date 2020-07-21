@@ -17,3 +17,5 @@ rm -f /var/log/slurm/slurm*.log
 
 nohup slurmctld -D -vvvvvv &> /dev/null &
 nohup slurmd -D -vvvvvv &> /dev/null &
+
+chmod a+r /var/log/slurm/accounting.txt

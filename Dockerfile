@@ -94,13 +94,14 @@ RUN chmod a+rx /usr/local/bin/stop_slurm.sh
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
+RUN echo "export PYTHONPATH=/data/snail/pys:\$PYTHONPATH" >> /etc/profile.d/pythonpath.sh
+
 RUN echo "\
 #!/bin/bash\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
 sudo cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/IbfExt* \
 /usr/local/anaconda3/lib/python3.7/site-packages/\n\
-sudo cp /data/snail/slurm_nimbix/all_config_env.sh /etc/profile.d/\n\
 sudo /usr/local/bin/start_slurm.sh" > /usr/local/bin/all_up.sh
 RUN chmod a+rx /usr/local/bin/all_up.sh
 RUN sed -i -e '$i /usr/local/bin/all_up.sh\n' /etc/rc.local

@@ -91,10 +91,10 @@ RUN chmod a+rx /usr/local/bin/status_slurm.sh
 RUN chmod a+rx /usr/local/bin/start_slurm.sh
 RUN chmod a+rx /usr/local/bin/stop_slurm.sh
 
+RUN echo "export PYTHONPATH=/data/snail/pys:\$PYTHONPATH" >> /etc/profile.d/pythonpath.sh
+
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
-
-RUN echo "export PYTHONPATH=/data/snail/pys:\$PYTHONPATH" >> /etc/profile.d/pythonpath.sh
 
 RUN echo "\
 #!/bin/bash\n\

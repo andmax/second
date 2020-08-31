@@ -70,9 +70,9 @@ ENV PATH /usr/local/anaconda3/bin:$PATH
 RUN conda init --system
 RUN conda update conda
 
-RUN conda install -c conda-forge boost numpy mpi4py ipyparallel pygraphml
+RUN conda install -c conda-forge boost numpy setuptools mpi4py ipyparallel pygraphml
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
-RUN conda install -c conda-forge six jsonschema ipython jupyter
+RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter notebook
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

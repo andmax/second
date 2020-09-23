@@ -1,6 +1,6 @@
 {
-    "name": "ubu16ppc64cuda9slurm20", 
-    "description": "Ubuntu 16.04 on POWER 8/9 with CUDA 9.2 and SLURM 20.02", 
+    "name": "ubu18ppc64cuda11", 
+    "description": "Ubuntu 18.04 on POWER 8/9 with CUDA 11.0", 
     "author": "Andre Maximo", 
     "licensed": true, 
     "classifications": [

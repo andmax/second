@@ -1,6 +1,6 @@
 {
     "name": "ubu18ppc64cuda11", 
-    "description": "Ubuntu 18.04 on POWER 8/9 with CUDA 11.0", 
+    "description": "Ubuntu 18.04 on POWER 8/9 with CUDA 10.0", 
     "author": "Andre Maximo", 
     "licensed": true, 
     "classifications": [

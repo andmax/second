@@ -1,4 +1,4 @@
-FROM nvidia/cuda-ppc64le:11.0-cudnn8-runtime-ubuntu18.04
+FROM nvidia/cuda-ppc64le:10.0-cudnn7-runtime-ubuntu18.04
 LABEL maintainer="andmax@gmail.com"
 
 RUN apt-get update -y

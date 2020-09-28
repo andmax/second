@@ -108,7 +108,6 @@ chown nimbix.nimbix /home/nimbix/www\n\
 touch /home/nimbix/.bashrc\n\
 chmod 640 /home/nimbix/.bashrc\n\
 chown nimbix.nimbix /home/nimbix/.bashrc\n\
-cp /data/snail/slurm_nimbix/nimbix_api_key.sh /home/nimbix/.bashrc\n\
 cp /data/snail/slurm_nimbix/crontab /etc/\n\
 cp /data/snail/slurm_nimbix/glancesweb.service /etc/systemd/system/\n\
 cp /data/snail/slurm_nimbix/httpserver.service /etc/systemd/system/\n\

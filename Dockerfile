@@ -9,7 +9,7 @@ RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/i
 
 RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential software-properties-common
-RUN apt-get install -y --no-install-recommends pciutils iputils-ping apt-utils hwloc ltrace strace ibverbs-utils cron
+RUN apt-get install -y --no-install-recommends pciutils iputils-ping apt-utils hwloc ltrace strace ibverbs-utils libnccl2
 RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev
 RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbase5-dev qt5-default numactl libnuma1 libnuma-dev
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
@@ -17,7 +17,8 @@ RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-de
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
 RUN apt-get install -y --no-install-recommends libpng12-dev munge libmunge2 hdf5-tools bzip2
 #RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools
-RUN apt-get install -y --no-install-recommends --fix-missing libnccl2 cuda-samples-9-2
+RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
+RUN apt-get install -y cron
 RUN apt-get -y clean
 
 ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH
@@ -102,6 +103,10 @@ RUN echo "\
 #!/bin/bash\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
+sudo touch /home/nimbix/.bashrc\n\
+sudo chmod 640 /home/nimbix/.bashrc\n\
+sudo chown nimbix.nimbix /home/nimbix/.bashrc\n\
+sudo cp /data/snail/slurm_nimbix/nimbix_api_key.sh /home/nimbix/.bashrc\n\
 sudo cp /data/snail/slurm_nimbix/crontab /etc/\n\
 sudo cp /data/snail/slurm_nimbix/*.service /etc/systemd/system/\n\
 sudo systemctl daemon-reload\n\

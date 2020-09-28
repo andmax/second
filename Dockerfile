@@ -103,6 +103,7 @@ RUN echo "\
 #!/bin/bash\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
+mkdir /etc/glances\n\
 mkdir /home/nimbix/www\n\
 chown nimbix.nimbix /home/nimbix/www\n\
 touch /home/nimbix/.bashrc\n\
@@ -111,6 +112,7 @@ chown nimbix.nimbix /home/nimbix/.bashrc\n\
 cp /data/snail/slurm_nimbix/crontab /etc/\n\
 cp /data/snail/slurm_nimbix/glancesweb.service /etc/systemd/system/\n\
 cp /data/snail/slurm_nimbix/httpserver.service /etc/systemd/system/\n\
+cp /data/snail/slurm_nimbix/glances.conf /etc/glances/\n\
 systemctl daemon-reload\n\
 service glancesweb start\n\
 service httpserver start\n\

@@ -103,6 +103,7 @@ RUN echo "\
 #!/bin/bash\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
+sudo mkdir /home/nimnix/www\n\
 sudo touch /home/nimbix/.bashrc\n\
 sudo chmod 640 /home/nimbix/.bashrc\n\
 sudo chown nimbix.nimbix /home/nimbix/.bashrc\n\

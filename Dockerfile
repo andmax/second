@@ -63,6 +63,8 @@ RUN apt-get -y autoclean
 #    jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator
 #RUN jupyter contrib nbextension install
 
+RUN curl -L https://bit.ly/glances | /bin/bash
+
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
 ENV PATH /usr/local/anaconda3/bin:$PATH
@@ -100,6 +102,7 @@ RUN echo "\
 #!/bin/bash\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
+glances -w -p 9000 &> /tmp/glances.log&\n
 sudo cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/IbfExt* \
 /usr/local/anaconda3/lib/python3.7/site-packages/\n\
 sudo touch /var/log/slurm/accounting.txt\n\

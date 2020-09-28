@@ -104,7 +104,7 @@ RUN echo "\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
 sudo cp /data/snail/slurm_nimbix/crontab /etc/\n\
 sudo cp /data/snail/slurm_nimbix/*.service /etc/systemd/system/\n\
-sudo systemctl daemon-reload
+sudo systemctl daemon-reload\n\
 sudo cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/IbfExt* \
 /usr/local/anaconda3/lib/python3.7/site-packages/\n\
 sudo touch /var/log/slurm/accounting.txt\n\

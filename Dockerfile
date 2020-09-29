@@ -77,6 +77,10 @@ RUN conda install -c conda-forge boost numpy setuptools mpi4py ipyparallel pygra
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
 RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter notebook
 
+RUN apt-get update -y
+RUN apt-get install -y npm
+RUN npm install http-server -g
+
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c

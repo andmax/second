@@ -103,23 +103,8 @@ RUN echo "\
 #!/bin/bash\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
-mkdir /etc/glances\n\
-mkdir /home/nimbix/www\n\
-chown nimbix.nimbix /home/nimbix/www\n\
-touch /home/nimbix/.bashrc\n\
-chmod 640 /home/nimbix/.bashrc\n\
-chown nimbix.nimbix /home/nimbix/.bashrc\n\
-cp /data/snail/slurm_nimbix/crontab /etc/\n\
-cp /data/snail/slurm_nimbix/glancesweb.service /etc/systemd/system/\n\
-cp /data/snail/slurm_nimbix/httpserver.service /etc/systemd/system/\n\
-cp /data/snail/slurm_nimbix/glances.conf /etc/glances/\n\
-systemctl daemon-reload\n\
-service glancesweb start\n\
-service httpserver start\n\
-cp /data/snail/IbfPython/IbfExtension/build/lib/python3.7/site-packages/IbfExt* \
-/usr/local/anaconda3/lib/python3.7/site-packages/\n\
-touch /var/log/slurm/accounting.txt\n\
-chmod a+r /var/log/slurm/accounting.txt\n\
+/data/snail/slurm_nimbix/start_services.sh\n\
+/data/snail/slurm_nimbix/prepare_extra.sh\n\
 /usr/local/bin/start_slurm.sh" > /usr/local/bin/all_up.sh
 RUN chmod a+rx /usr/local/bin/all_up.sh
 RUN sed -i -e '$i /usr/local/bin/all_up.sh\n' /etc/rc.local

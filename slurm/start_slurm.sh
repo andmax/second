@@ -5,6 +5,10 @@
 # @date May, 2020
 # @copyright The MIT License
 
+touch /var/log/slurm/accounting.txt
+
+chmod a+r /var/log/slurm/accounting.txt
+
 sed "s/SlurmctldHost=/SlurmctldHost=$(head -n 1 /etc/JARVICE/nodes)/g" /usr/local/etc/base_slurm.conf > /usr/local/etc/slurm.conf
 
 #cat /etc/JARVICE/nodes | while read node; do echo -e "NodeName=$node RealMemory=$(expr $(grep MemTotal /proc/meminfo | awk '{print $2}') / 1024) Sockets=$(lscpu | grep Socket\(s\) | awk '{print $2}') CoresPerSocket=$(lscpu | grep Core\(s\) | awk '{print $4}') ThreadsPerCore=$(lscpu | grep Thread\(s\) | awk '{print $4}') Gres=gpu:tesla_k80:no_consume:1 State=UNKNOWN\n"; done >> /usr/local/etc/slurm.conf

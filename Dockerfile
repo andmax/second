@@ -66,8 +66,6 @@ RUN apt-get -y autoclean
 
 RUN curl -L https://bit.ly/glances | /bin/bash
 
-RUN npm install http-server -g
-
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
 ENV PATH /usr/local/anaconda3/bin:$PATH

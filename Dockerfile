@@ -19,7 +19,6 @@ RUN apt-get install -y --no-install-recommends libpng12-dev munge libmunge2 hdf5
 #RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools
 RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
 RUN apt-get install -y cron
-RUN apt-get install -y npm
 RUN apt-get -y clean
 
 ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH

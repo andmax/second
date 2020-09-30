@@ -77,9 +77,9 @@ RUN conda install -c conda-forge boost numpy setuptools mpi4py ipyparallel pygra
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
 RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter notebook
 
-RUN apt-get update -y
-RUN apt-get install -y npm
-RUN npm install http-server -g
+#RUN apt-get update -y
+#RUN apt-get install -y npm
+#RUN npm install http-server -g
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace
@@ -105,10 +105,10 @@ RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/j
 
 RUN echo "\
 #!/bin/bash\n\
+/data/snail/slurm_nimbix/install_extra.sh\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
 /data/snail/slurm_nimbix/start_services.sh\n\
-/data/snail/slurm_nimbix/prepare_extra.sh\n\
 /usr/local/bin/start_slurm.sh" > /usr/local/bin/all_up.sh
 RUN chmod a+rx /usr/local/bin/all_up.sh
 RUN sed -i -e '$i /usr/local/bin/all_up.sh\n' /etc/rc.local

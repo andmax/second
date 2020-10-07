@@ -15,7 +15,7 @@ RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbas
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
 RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
-RUN apt-get install -y --no-install-recommends libpng12-dev munge libmunge2 hdf5-tools bzip2
+RUN apt-get install -y --no-install-recommends libpng-dev munge libmunge2 hdf5-tools bzip2
 #RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools
 #RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
 RUN apt-get install -y --no-install-recommends cuda-samples-9-2

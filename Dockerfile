@@ -21,8 +21,8 @@ RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
 RUN apt-get install -y cron
 RUN apt-get -y clean
 
-ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH
-RUN cd /usr/local/cuda/samples && make -j"$(nproc)" -k &> /dev/null ; exit 0
+#ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH
+#RUN cd /usr/local/cuda/samples && make -j"$(nproc)" -k &> /dev/null ; exit 0
 
 RUN mkdir -p /var/tmp
 

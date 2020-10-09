@@ -18,9 +18,9 @@ RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-de
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
 RUN apt-get install -y --no-install-recommends libpng-dev munge libmunge2 hdf5-tools bzip2
 #RUN apt-get install -y --no-install-recommends python3 python3-dev python3-pip python3-setuptools
-#RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
+RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
 #RUN apt-get install -y --no-install-recommends cuda-samples-9-2
-RUN apt-get install -y --no-install-recommends cuda-samples-11-0
+#RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 RUN apt-get install -y cron
 RUN apt-get -y clean
 

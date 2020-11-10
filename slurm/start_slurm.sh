@@ -26,7 +26,7 @@ cat /etc/JARVICE/nodes | while read node; do echo -e "NodeName=$node RealMemory=
 
 echo "PartitionName=all Nodes=$(cat /etc/JARVICE/nodes | tr '\n' ',' | sed s/.$// -) Default=YES MaxTime=INFINITE State=UP" >> /usr/local/etc/slurm.conf
 
-echo "Cleaning up SLURM log" &>> $OUTFP
+echo "Cleaning up SLURM logs" &>> $OUTFP
 
 rm -f /var/log/slurm/slurm*.log
 

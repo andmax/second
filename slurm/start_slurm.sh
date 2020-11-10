@@ -12,7 +12,7 @@ echo "Enabling SLURM accounting access for all users" &> $OUTFP
 touch /var/log/slurm/accounting.txt
 chmod a+r /var/log/slurm/accounting.txt
 
-echo "Filling slurm.conf and gres.conf in /usr/local/etc/" &>> $OUTFP
+echo "Filling up gres.conf and slurm.conf in /usr/local/etc/" &>> $OUTFP
 
 cp /usr/local/etc/base_gres.conf /usr/local/etc/gres.conf
 
@@ -26,9 +26,15 @@ cat /etc/JARVICE/nodes | while read node; do echo -e "NodeName=$node RealMemory=
 
 echo "PartitionName=all Nodes=$(cat /etc/JARVICE/nodes | tr '\n' ',' | sed s/.$// -) Default=YES MaxTime=INFINITE State=UP" >> /usr/local/etc/slurm.conf
 
-echo "Cleaning up SLURM log and starting SLURM ctld + d" &>> $OUTFP
+echo "Cleaning up SLURM log" &>> $OUTFP
 
 rm -f /var/log/slurm/slurm*.log
 
-nohup slurmctld -D -vvvvvv &> /dev/null &
+if [[ $(head -n 1 /etc/JARVICE/nodes) == $(hostname) ]]; then
+    echo "Starting SLURM central management daemon (ctld)" &>> $OUTFP
+    nohup slurmctld -D -vvvvvv &> /dev/null &
+fi
+
+echo "Starting SLURM compute node daemon (d)" &>> $OUTFP
+
 nohup slurmd -D -vvvvvv &> /dev/null &

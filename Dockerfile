@@ -95,7 +95,7 @@ COPY slurm/start_slurm.sh /usr/local/bin/start_slurm.sh
 COPY slurm/stop_slurm.sh /usr/local/bin/stop_slurm.sh
 
 COPY slurm/base_slurm.conf /usr/local/etc/base_slurm.conf
-COPY slurm/gres.conf /usr/local/etc/gres.conf
+COPY slurm/base_gres.conf /usr/local/etc/base_gres.conf
 
 RUN chmod a+rx /usr/local/bin/status_slurm.sh
 RUN chmod a+rx /usr/local/bin/start_slurm.sh

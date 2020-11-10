@@ -108,12 +108,11 @@ RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/j
 
 RUN echo "\
 #!/bin/bash\n\
-set -x\n\
-/data/snail/slurm_nimbix/install_extra.sh &> /tmp/install_extra.log\n\
-/data/snail/slurm_nimbix/all_create_user.sh &> /tmp/all_create_user.log\n\
-/data/snail/slurm_nimbix/all_start_jupyter.sh &> /tmp/all_start_jupyter.log\n\
-/usr/local/bin/start_slurm.sh &> /tmp/start_slurm.log\n\
-/data/snail/slurm_nimbix/start_services.sh &> /tmp/start_services.log\
+/data/snail/slurm_nimbix/install_extra.sh\n\
+/data/snail/slurm_nimbix/all_create_user.sh\n\
+/data/snail/slurm_nimbix/all_start_jupyter.sh\n\
+/usr/local/bin/start_slurm.sh\n\
+/data/snail/slurm_nimbix/start_services.sh\
 " > /usr/local/bin/all_up.sh
 RUN chmod a+rx /usr/local/bin/all_up.sh
 RUN sed -i -e '$i /usr/local/bin/all_up.sh\n' /etc/rc.local

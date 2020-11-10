@@ -5,7 +5,7 @@
 # @date May, 2020
 # @copyright The MIT License
 
-OUTFP=/tmp/$0.log
+OUTFP=/tmp/$(basename -- $0.log)
 
 echo "Enabling SLURM accounting access for all users" &>> $OUTFP
 
@@ -14,7 +14,7 @@ chmod a+r /var/log/slurm/accounting.txt
 
 echo "Filling slurm.conf and gres.conf in /usr/local/etc/" &>> $OUTFP
 
-cp /usr/local/etc/base_gres.conf /usr/local/etc/gres.conf &>> $OUTFP
+cp /usr/local/etc/base_gres.conf /usr/local/etc/gres.conf
 
 i=0 | nvidia-smi --query-gpu=gpu_name --format=csv,noheader | tr '[:upper:]' '[:lower:]' | tr ' ' '_' | while read gpu_name; do echo "Name=gpu Type=$gpu_name File=/dev/nvidia$((i++))"; done >> /usr/local/etc/gres.conf
 

@@ -7,7 +7,7 @@
 
 OUTFP=/tmp/$(basename -- $0.log)
 
-echo "Enabling SLURM accounting access for all users" &>> $OUTFP
+echo "Enabling SLURM accounting access for all users" &> $OUTFP
 
 touch /var/log/slurm/accounting.txt
 chmod a+r /var/log/slurm/accounting.txt

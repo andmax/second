@@ -44,8 +44,6 @@ RUN cd /var/tmp/openmpi-${OPENMPI_VERS} && \
     ldconfig
 RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_VERS}
 
-RUN echo "export PATH=/usr/local/openmpi/bin:\$PATH" >> /etc/profile.d/openmpi.sh
-
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH \
     PATH=/usr/local/openmpi/bin:$PATH
 
@@ -100,8 +98,6 @@ COPY slurm/base_gres.conf /usr/local/etc/base_gres.conf
 RUN chmod a+rx /usr/local/bin/status_slurm.sh
 RUN chmod a+rx /usr/local/bin/start_slurm.sh
 RUN chmod a+rx /usr/local/bin/stop_slurm.sh
-
-RUN echo "export PYTHONPATH=/data/snail/:/data/snail/Trend%20Calculator/:\$PYTHONPATH" >> /etc/profile.d/pythonpath.sh
 
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -

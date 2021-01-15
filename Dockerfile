@@ -60,13 +60,13 @@ RUN apt-get -y autoremove
 RUN apt-get -y autoclean
 RUN apt-get -y update
 
-RUN pip3 install --upgrade pip setuptools
-
+#RUN pip3 install --upgrade pip setuptools
 #RUN pip3 install matplotlib pygraphml scipy pandas numpy \
 #    mpi4py sockets ipython ipyparallel jsonschema six==1.11 \
 #    jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator
 #RUN jupyter contrib nbextension install
 
+RUN pip install --upgrade pip
 RUN curl -L https://bit.ly/glances | /bin/bash
 
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh

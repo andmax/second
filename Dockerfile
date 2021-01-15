@@ -58,6 +58,7 @@ RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSIO
 
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
+RUN apt-get -y update
 
 #RUN pip3 install --upgrade pip setuptools
 #RUN pip3 install matplotlib pygraphml scipy pandas numpy \

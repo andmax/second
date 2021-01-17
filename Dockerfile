@@ -76,9 +76,10 @@ ENV PATH /usr/local/anaconda3/bin:$PATH
 RUN conda init --system
 RUN conda update conda
 
-RUN conda install -c conda-forge boost numpy setuptools mpi4py ipyparallel pygraphml
+RUN conda install -c conda-forge boost numpy setuptools ipyparallel pygraphml
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
 RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter notebook
+#RUN pip install mpi4py
 
 #RUN apt-get update -y
 #RUN apt-get install -y npm

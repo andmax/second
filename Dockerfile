@@ -12,12 +12,12 @@ RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential software-properties-common
 RUN apt-get install -y --no-install-recommends pciutils iputils-ping apt-utils hwloc ltrace strace ibverbs-utils libnccl2
 RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev
-RUN apt-get install -y --no-install-recommends xutils-dev qtbase5-dev qt5-default numactl libnuma1 libnuma-dev
+#RUN apt-get install -y --no-install-recommends libboost-all-dev python3 python3-dev python3-pip python3-setuptools
+#RUN apt-get install -y --no-install-recommends xutils-dev qtbase5-dev qt5-default numactl libnuma1 libnuma-dev
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
 RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
 RUN apt-get install -y --no-install-recommends libpng-dev munge libmunge2 hdf5-tools bzip2 cron
-#RUN apt-get install -y --no-install-recommends libboost-all-dev python3 python3-dev python3-pip python3-setuptools
 #RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 #RUN apt-get install -y --no-install-recommends cuda-samples-9-2
 RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2

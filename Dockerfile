@@ -10,15 +10,13 @@ RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/i
 
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential software-properties-common
-#RUN apt-get install -y --no-install-recommends libboost-all-dev python3 python3-dev python3-pip python3-setuptools qtbase5-dev qt5-default
-RUN apt-get install -y --no-install-recommends pciutils iputils-ping apt-utils hwloc ltrace strace ibverbs-utils libnccl2 libffi-dev
-RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev xutils-dev libgeos-dev
-
-RUN apt-get update -y --fix-missing
-RUN apt-get install -y --no-install-recommends numactl libnuma1 libnuma-dev libxslt-dev libxml2-dev libmunge-dev libmunge2 munge
-RUN apt-get install -y --no-install-recommends libopenblas-dev liblapack-dev libnccl-dev libicu-dev libbz2-dev liblz-dev bzip2
-RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev libpng-dev gnuplot graphviz perftest hdf5-tools cron
-
+RUN apt-get install -y --no-install-recommends pciutils iputils-ping apt-utils hwloc ltrace strace ibverbs-utils libnccl2
+RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev
+RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbase5-dev qt5-default numactl libnuma1 libnuma-dev
+RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
+RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
+RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
+RUN apt-get install -y --no-install-recommends libpng-dev munge libmunge2 hdf5-tools bzip2
 RUN apt-get update -y --fix-missing
 #RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 #RUN apt-get install -y --no-install-recommends cuda-samples-9-2
@@ -57,7 +55,7 @@ RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-hdf5=no --with-mung
     make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
 
-RUN apt-get -y remove openmpi-bin
+#RUN apt-get -y remove openmpi-bin
 RUN apt-get -y autoremove
 RUN apt-get -y autoclean
 RUN apt-get -y update

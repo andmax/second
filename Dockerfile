@@ -8,21 +8,21 @@ RUN apt-get -y clean
 
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash -s
 
-RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends --fix-missing pkg-config debhelper dkms build-essential software-properties-common
-#RUN apt-get install -y --no-install-recommends --fix-missing libboost-all-dev python3 python3-dev python3-pip python3-setuptools qtbase5-dev qt5-default
-RUN apt-get install -y --no-install-recommends --fix-missing pciutils iputils-ping apt-utils hwloc ltrace strace ibverbs-utils libnccl2 libffi-dev
-RUN apt-get install -y --no-install-recommends --fix-missing gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev xutils-dev libgeos-dev
+RUN apt-get update -y --fix-missing
+RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential software-properties-common
+#RUN apt-get install -y --no-install-recommends libboost-all-dev python3 python3-dev python3-pip python3-setuptools qtbase5-dev qt5-default
+RUN apt-get install -y --no-install-recommends pciutils iputils-ping apt-utils hwloc ltrace strace ibverbs-utils libnccl2 libffi-dev
+RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev xutils-dev libgeos-dev
 
-RUN apt-get update -y
-RUN apt-get install -y --no-install-recommends --fix-missing numactl libnuma1 libnuma-dev libxslt-dev libxml2-dev libmunge-dev libmunge2 munge
-RUN apt-get install -y --no-install-recommends --fix-missing libopenblas-dev liblapack-dev libnccl-dev libicu-dev libbz2-dev liblz-dev bzip2
-RUN apt-get install -y --no-install-recommends --fix-missing texlive-xetex libfreetype6-dev libpng-dev gnuplot graphviz perftest hdf5-tools cron
+RUN apt-get update -y --fix-missing
+RUN apt-get install -y --no-install-recommends numactl libnuma1 libnuma-dev libxslt-dev libxml2-dev libmunge-dev libmunge2 munge
+RUN apt-get install -y --no-install-recommends libopenblas-dev liblapack-dev libnccl-dev libicu-dev libbz2-dev liblz-dev bzip2
+RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev libpng-dev gnuplot graphviz perftest hdf5-tools cron
 
-RUN apt-get update -y
-#RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-11-0
-#RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
-RUN apt-get install -y --no-install-recommends --fix-missing cuda-samples-9-2
+RUN apt-get update -y --fix-missing
+#RUN apt-get install -y --no-install-recommends cuda-samples-11-0
+#RUN apt-get install -y --no-install-recommends cuda-samples-9-2
+RUN apt-get install -y --no-install-recommends cuda-samples-9-2
 RUN apt-get -y clean
 
 #ENV LD_LIBRARY_PATH=/usr/lib/nvidia-410:$LD_LIBRARY_PATH

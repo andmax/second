@@ -16,7 +16,7 @@ RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbas
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
 RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
-RUN apt-get install -y --no-install-recommends libpng-dev munge libmunge2 hdf5-tools bzip2
+RUN apt-get install -y --no-install-recommends libpng-dev munge libmunge2 hdf5-tools bzip2 cron
 RUN apt-get update -y --fix-missing
 #RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 #RUN apt-get install -y --no-install-recommends cuda-samples-9-2
@@ -76,7 +76,7 @@ ENV PATH /usr/local/anaconda3/bin:$PATH
 RUN conda init --system
 RUN conda update conda
 
-RUN conda install -c conda-forge boost numpy setuptools ipyparallel pygraphml
+RUN conda install -c conda-forge boost numpy setuptools mpi4py ipyparallel pygraphml
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
 RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter notebook
 #RUN pip install mpi4py

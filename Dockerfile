@@ -67,7 +67,6 @@ RUN apt-get -y update
 #RUN jupyter contrib nbextension install
 
 RUN pip install --upgrade pip
-RUN curl -L https://bit.ly/glances | /bin/bash
 
 RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
 RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
@@ -84,6 +83,8 @@ RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter noteb
 #RUN apt-get update -y
 #RUN apt-get install -y npm
 #RUN npm install http-server -g
+
+RUN curl -L https://bit.ly/glances | /bin/bash
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

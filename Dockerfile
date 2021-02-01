@@ -46,7 +46,8 @@ RUN rm -rf /var/tmp/openmpi-${OPENMPI_VERS}.tar.bz2 /var/tmp/openmpi-${OPENMPI_V
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH \
     PATH=/usr/local/openmpi/bin:$PATH
 
-ENV SLURM_VERSION=20.11.3
+#ENV SLURM_VERSION=20.11.3
+ENV SLURM_VERSION=20.02.3
 RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
@@ -75,9 +76,10 @@ ENV PATH /usr/local/anaconda3/bin:$PATH
 RUN conda init --system
 RUN conda update conda
 
-RUN conda install -c conda-forge boost numpy setuptools mpi4py ipyparallel pygraphml
+RUN conda install -c conda-forge boost numpy setuptools mpi4py pygraphml
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
 RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter notebook
+#RUN conda install -c conda-forge ipyparallel
 #RUN pip install mpi4py
 
 #RUN apt-get update -y

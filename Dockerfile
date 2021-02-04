@@ -112,7 +112,6 @@ RUN echo "\
 /data/snail/slurm_nimbix/install_extra.sh\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\
-/usr/local/bin/start_slurm.sh\n\
 /data/snail/slurm_nimbix/start_services.sh\
 " > /usr/local/bin/all_up.sh
 RUN chmod a+rx /usr/local/bin/all_up.sh

@@ -15,8 +15,8 @@ RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-
 RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbase5-dev qt5-default numactl libnuma1 libnuma-dev
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
 RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
-RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz perftest
-RUN apt-get install -y --no-install-recommends libpng-dev munge libmunge2 hdf5-tools bzip2 cron
+RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz libpng-dev perftest
+RUN apt-get install -y --no-install-recommends libmysqlclient-dev libhdf5-dev munge libmunge2 hdf5-tools bzip2 cron
 RUN apt-get update -y --fix-missing
 #RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 #RUN apt-get install -y --no-install-recommends cuda-samples-9-2
@@ -51,7 +51,8 @@ ENV SLURM_VERSION=20.02.3
 RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
-RUN cd /var/tmp/slurm-${SLURM_VERSION} && ./configure --with-hdf5=no --with-munge=/usr/lib/libmunge.so && \
+RUN cd /var/tmp/slurm-${SLURM_VERSION} && \
+    ./configure --with-hdf5=no --with-mysql=/usr/bin/mysql_config --with-munge=/usr/lib/libmunge.so && \
     make -j"$(nproc)" && \
     make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
@@ -94,16 +95,14 @@ RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
 
 RUN echo "/data/inglib/power8/bin" >> /etc/ld.so.conf.d/ibf.conf && ldconfig
 
-COPY slurm/status_slurm.sh /usr/local/bin/status_slurm.sh
-COPY slurm/start_slurm.sh /usr/local/bin/start_slurm.sh
-COPY slurm/stop_slurm.sh /usr/local/bin/stop_slurm.sh
-
-COPY slurm/base_slurm.conf /usr/local/etc/base_slurm.conf
-COPY slurm/base_gres.conf /usr/local/etc/base_gres.conf
-
-RUN chmod a+rx /usr/local/bin/status_slurm.sh
-RUN chmod a+rx /usr/local/bin/start_slurm.sh
-RUN chmod a+rx /usr/local/bin/stop_slurm.sh
+#COPY slurm/status_slurm.sh /usr/local/bin/status_slurm.sh
+#COPY slurm/start_slurm.sh /usr/local/bin/start_slurm.sh
+#COPY slurm/stop_slurm.sh /usr/local/bin/stop_slurm.sh
+#COPY slurm/base_slurm.conf /usr/local/etc/base_slurm.conf
+#COPY slurm/base_gres.conf /usr/local/etc/base_gres.conf
+#RUN chmod a+rx /usr/local/bin/status_slurm.sh
+#RUN chmod a+rx /usr/local/bin/start_slurm.sh
+#RUN chmod a+rx /usr/local/bin/stop_slurm.sh
 
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -

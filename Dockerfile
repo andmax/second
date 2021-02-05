@@ -52,7 +52,7 @@ RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/sl
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
 RUN cd /var/tmp/slurm-${SLURM_VERSION} && \
-    ./configure --with-hdf5=no --with-mysql=/usr/bin/mysql_config --with-munge=/usr/lib/libmunge.so && \
+    ./configure --with-mysql=/usr/bin/mysql_config --with-hdf5=no --with-munge=/usr/lib/libmunge.so --with-pmi=pmi2 && \
     make -j"$(nproc)" && \
     make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}

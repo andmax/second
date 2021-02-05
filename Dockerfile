@@ -14,9 +14,9 @@ RUN apt-get install -y --no-install-recommends pciutils iputils-ping apt-utils h
 RUN apt-get install -y --no-install-recommends gcc g++ gfortran perl make cmake-curses-gui cmake-gui autotools-dev
 RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbase5-dev qt5-default numactl libnuma1 libnuma-dev
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
-RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
-RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz libpng-dev perftest
-RUN apt-get install -y --no-install-recommends libmysqlclient-dev libhdf5-dev munge libmunge2 hdf5-tools bzip2 cron
+RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev bzip2
+RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz libpng-dev perftest cron
+RUN apt-get install -y --no-install-recommends libmysqlclient-dev mysql-server libhdf5-dev hdf5-tools libmunge2 munge
 RUN apt-get update -y --fix-missing
 #RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 #RUN apt-get install -y --no-install-recommends cuda-samples-9-2

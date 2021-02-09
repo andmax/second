@@ -44,12 +44,11 @@ ENV OMPI_VERSION=${OMPI_V}.0
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v${OMPI_V}/downloads/openmpi-${OMPI_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/openmpi-${OMPI_VERSION}.tar.bz2 -C /var/tmp
 WORKDIR /var/tmp/openmpi-${OMPI_VERSION}
-RUN CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran \
-    ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
+RUN ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
     --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs \
     --with-slurm --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr
-RUN make -j"$(nproc)" && \
-    make -j"$(nproc)" install
+RUN make -j"$(nproc)"
+RUN make -j"$(nproc)" install
 RUN echo "/usr/local/openmpi/lib" >> /etc/ld.so.conf.d/openmpi.conf
 RUN ldconfig
 RUN rm -rf /var/tmp/openmpi-${OMPI_VERSION}.tar.bz2 /var/tmp/openmpi-${OMPI_VERSION}
@@ -63,7 +62,8 @@ RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/sl
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
 WORKDIR /var/tmp/slurm-${SLURM_VERSION}
-RUN ./configure --with-mysql=/usr/bin/mysql_config --with-hdf5=no --with-munge=/usr/lib/libmunge.so --with-pmix=/usr/local/pmix
+RUN ./configure --with-mysql_config=/usr/bin/mysql_config --with-hdf5=no --with-munge=/usr/lib/libmunge.so \
+    --with-pmix=/usr/local/pmix --with-hwloc=/usr
 RUN make -j"$(nproc)"
 RUN make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}

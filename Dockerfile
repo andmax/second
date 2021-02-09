@@ -34,10 +34,8 @@ RUN wget -q -nc --no-check-certificate -P /var/tmp https://github.com/openpmix/o
 RUN tar -j -x -f /var/tmp/pmix-${PMIX_VERSION}.tar.bz2 -C /var/tmp
 RUN cd /var/tmp/pmix-${PMIX_VERSION} && \
     ./autogen.pl && \
-	mkdir build && \
-	cd build && \
-	../configure --prefix=/usr/local/pmix && \
-	make all install
+    ./configure --prefix=/usr/local/pmix && \
+    make all install
 RUN rm -rf /var/tmp/pmix-${PMIX_VERSION}.tar.bz2 /var/tmp/pmix-${PMIX_VERSION}
 
 #ENV OMPI_VERSION=3.1.1

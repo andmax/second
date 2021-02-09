@@ -32,10 +32,10 @@ RUN mkdir -p /var/tmp
 ENV PMIX_VERSION=3.1.6
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://github.com/openpmix/openpmix/releases/download/v${PMIX_VERSION}/pmix-${PMIX_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/pmix-${PMIX_VERSION}.tar.bz2 -C /var/tmp
-RUN cd /var/tmp/pmix-${PMIX_VERSION} && \
-    ./autogen.pl && \
-    ./configure --prefix=/usr/local/pmix && \
-    make all install
+RUN cd /var/tmp/pmix-${PMIX_VERSION}
+RUN ./autogen.pl
+RUN ./configure --prefix=/usr/local/pmix
+RUN make all install
 RUN rm -rf /var/tmp/pmix-${PMIX_VERSION}.tar.bz2 /var/tmp/pmix-${PMIX_VERSION}
 
 #ENV OMPI_VERSION=3.1.1
@@ -43,15 +43,15 @@ ENV OMPI_V=4.1
 ENV OMPI_VERSION=${OMPI_V}.0
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v${OMPI_V}/downloads/openmpi-${OMPI_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/openmpi-${OMPI_VERSION}.tar.bz2 -C /var/tmp
-RUN cd /var/tmp/openmpi-${OMPI_VERSION} && \
-    CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran \
+RUN cd /var/tmp/openmpi-${OMPI_VERSION}
+RUN CC=gcc CXX=g++ F77=gfortran F90=gfortran FC=gfortran \
     ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
     --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs \
-    --with-slurm --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr && \
-    make -j"$(nproc)" && \
-    make -j"$(nproc)" install && \
-    echo "/usr/local/openmpi/lib" >> /etc/ld.so.conf.d/openmpi.conf && \
-    ldconfig
+    --with-slurm --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr
+RUN make -j"$(nproc)" && \
+    make -j"$(nproc)" install
+RUN echo "/usr/local/openmpi/lib" >> /etc/ld.so.conf.d/openmpi.conf
+RUN ldconfig
 RUN rm -rf /var/tmp/openmpi-${OMPI_VERSION}.tar.bz2 /var/tmp/openmpi-${OMPI_VERSION}
 
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH \
@@ -62,10 +62,10 @@ ENV SLURM_VERSION=20.11.3
 RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_VERSION}.tar.bz2
 RUN tar -j -x -f /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 -C /var/tmp
-RUN cd /var/tmp/slurm-${SLURM_VERSION} && \
-    ./configure --with-mysql=/usr/bin/mysql_config --with-hdf5=no --with-munge=/usr/lib/libmunge.so --with-pmix=/usr/local/pmix && \
-    make -j"$(nproc)" && \
-    make -j"$(nproc)" install
+RUN cd /var/tmp/slurm-${SLURM_VERSION}
+RUN ./configure --with-mysql=/usr/bin/mysql_config --with-hdf5=no --with-munge=/usr/lib/libmunge.so --with-pmix=/usr/local/pmix
+RUN make -j"$(nproc)"
+RUN make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_VERSION}.tar.bz2 /var/tmp/slurm-${SLURM_VERSION}
 
 # Removing ubuntu openmpi breaks other packages, better not

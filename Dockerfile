@@ -36,11 +36,12 @@ WORKDIR /var/tmp/pmix-${PMIX_V}
 RUN ./autogen.pl
 RUN ./configure --prefix=/usr/local/pmix
 RUN make all install
+RUN echo "/usr/local/pmix/lib" >> /etc/ld.so.conf.d/pmix.conf
+RUN ldconfig
 RUN rm -rf /var/tmp/pmix-${PMIX_V}.tar.bz2 /var/tmp/pmix-${PMIX_V}
 
-#ENV OMPI_V=3.1.1
-ENV OMPI_B=4.1
-ENV OMPI_V=${OMPI_B}.0
+ENV OMPI_B=3.1
+ENV OMPI_V=${OMPI_B}.1
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v${OMPI_B}/downloads/openmpi-${OMPI_V}.tar.bz2
 RUN tar -j -x -f /var/tmp/openmpi-${OMPI_V}.tar.bz2 -C /var/tmp
 WORKDIR /var/tmp/openmpi-${OMPI_V}

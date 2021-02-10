@@ -16,7 +16,8 @@ RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbas
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
 RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz libpng-dev
-RUN apt-get install -y --no-install-recommends bzip2 perftest cron automake autoconf libtool libevent-dev libhwloc-dev
+RUN apt-get install -y --no-install-recommends bzip2 perftest cron
+#RUN apt-get install -y --no-install-recommends automake autoconf libtool libevent-dev libhwloc-dev
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y --no-install-recommends libmysqlclient-dev libhdf5-dev hdf5-tools libmunge2 munge
 RUN apt-get install -y --no-install-recommends cuda-samples-9-2
@@ -29,16 +30,16 @@ RUN apt-get -y clean
 
 RUN mkdir -p /var/tmp
 
-ENV PMIX_V=3.1.6
-RUN wget -q -nc --no-check-certificate -P /var/tmp https://github.com/openpmix/openpmix/releases/download/v${PMIX_V}/pmix-${PMIX_V}.tar.bz2
-RUN tar -j -x -f /var/tmp/pmix-${PMIX_V}.tar.bz2 -C /var/tmp
-WORKDIR /var/tmp/pmix-${PMIX_V}
-RUN ./autogen.pl
-RUN ./configure --prefix=/usr/local/pmix
-RUN make all install
-RUN echo "/usr/local/pmix/lib" >> /etc/ld.so.conf.d/pmix.conf
-RUN ldconfig
-RUN rm -rf /var/tmp/pmix-${PMIX_V}.tar.bz2 /var/tmp/pmix-${PMIX_V}
+#ENV PMIX_V=3.1.6
+#RUN wget -q -nc --no-check-certificate -P /var/tmp https://github.com/openpmix/openpmix/releases/download/v${PMIX_V}/pmix-${PMIX_V}.tar.bz2
+#RUN tar -j -x -f /var/tmp/pmix-${PMIX_V}.tar.bz2 -C /var/tmp
+#WORKDIR /var/tmp/pmix-${PMIX_V}
+#RUN ./autogen.pl
+#RUN ./configure --prefix=/usr/local/pmix
+#RUN make all install
+#RUN echo "/usr/local/pmix/lib" >> /etc/ld.so.conf.d/pmix.conf
+#RUN ldconfig
+#RUN rm -rf /var/tmp/pmix-${PMIX_V}.tar.bz2 /var/tmp/pmix-${PMIX_V}
 
 ENV OMPI_B=3.1
 ENV OMPI_V=${OMPI_B}.1
@@ -46,8 +47,8 @@ RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/soft
 RUN tar -j -x -f /var/tmp/openmpi-${OMPI_V}.tar.bz2 -C /var/tmp
 WORKDIR /var/tmp/openmpi-${OMPI_V}
 RUN ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
-    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs \
-    --with-slurm --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr
+    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs --with-slurm
+#    --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr
 RUN make -j"$(nproc)"
 RUN make -j"$(nproc)" install
 RUN echo "/usr/local/openmpi/lib" >> /etc/ld.so.conf.d/openmpi.conf
@@ -63,8 +64,8 @@ RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/sl
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_V}.tar.bz2
 RUN tar -j -x -f /var/tmp/slurm-${SLURM_V}.tar.bz2 -C /var/tmp
 WORKDIR /var/tmp/slurm-${SLURM_V}
-RUN ./configure --with-mysql_config=/usr/bin --with-hdf5=no --with-munge=/usr/lib/libmunge.so \
-    --with-pmix=/usr/local/pmix --with-hwloc=/usr
+RUN ./configure --with-mysql_config=/usr/bin --with-hdf5=no --with-munge=/usr/lib/libmunge.so
+#    --with-pmix=/usr/local/pmix --with-hwloc=/usr
 RUN make -j"$(nproc)"
 RUN make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_V}.tar.bz2 /var/tmp/slurm-${SLURM_V}

@@ -59,7 +59,7 @@ RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/soft
 RUN tar -j -x -f /var/tmp/openmpi-${OMPI_V}.tar.bz2 -C /var/tmp
 WORKDIR /var/tmp/openmpi-${OMPI_V}
 RUN ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
-    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs --with-slurm --with-pmi
+    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs --with-slurm --with-pmi=/usr
 #    --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr
 RUN make -j"$(nproc)"
 RUN make -j"$(nproc)" install

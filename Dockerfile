@@ -51,6 +51,10 @@ RUN ./configure --with-mysql_config=/usr/bin --with-hdf5=no --with-munge=/usr/li
 #    --with-pmix=/usr/local/pmix --with-hwloc=/usr
 RUN make -j"$(nproc)"
 RUN make -j"$(nproc)" install
+RUN ldconfig
+WORKDIR /var/tmp/slurm-${SLURM_V}/contribs/pmi2
+RUN make -j"$(nproc)" install
+RUN ldconfig
 RUN rm -rf /var/tmp/slurm-${SLURM_V}.tar.bz2 /var/tmp/slurm-${SLURM_V}
 
 ENV OMPI_B=3.1
@@ -59,7 +63,8 @@ RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/soft
 RUN tar -j -x -f /var/tmp/openmpi-${OMPI_V}.tar.bz2 -C /var/tmp
 WORKDIR /var/tmp/openmpi-${OMPI_V}
 RUN ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
-    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs --with-slurm --with-pmi=/usr/local
+    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs --with-slurm \
+    --with-pmi=/usr/local/include/slurm --with-pmi-libdir=/usr/local/lib
 #    --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr
 RUN make -j"$(nproc)"
 RUN make -j"$(nproc)" install

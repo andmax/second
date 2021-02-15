@@ -41,23 +41,6 @@ RUN mkdir -p /var/tmp
 #RUN ldconfig
 #RUN rm -rf /var/tmp/pmix-${PMIX_V}.tar.bz2 /var/tmp/pmix-${PMIX_V}
 
-ENV OMPI_B=3.1
-ENV OMPI_V=${OMPI_B}.1
-RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v${OMPI_B}/downloads/openmpi-${OMPI_V}.tar.bz2
-RUN tar -j -x -f /var/tmp/openmpi-${OMPI_V}.tar.bz2 -C /var/tmp
-WORKDIR /var/tmp/openmpi-${OMPI_V}
-RUN ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
-    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs --with-slurm
-#    --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr
-RUN make -j"$(nproc)"
-RUN make -j"$(nproc)" install
-RUN echo "/usr/local/openmpi/lib" >> /etc/ld.so.conf.d/openmpi.conf
-RUN ldconfig
-RUN rm -rf /var/tmp/openmpi-${OMPI_V}.tar.bz2 /var/tmp/openmpi-${OMPI_V}
-
-ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH \
-    PATH=/usr/local/openmpi/bin:$PATH
-
 #ENV SLURM_V=20.02.3
 ENV SLURM_V=20.11.3
 RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/slurm
@@ -69,6 +52,23 @@ RUN ./configure --with-mysql_config=/usr/bin --with-hdf5=no --with-munge=/usr/li
 RUN make -j"$(nproc)"
 RUN make -j"$(nproc)" install
 RUN rm -rf /var/tmp/slurm-${SLURM_V}.tar.bz2 /var/tmp/slurm-${SLURM_V}
+
+ENV OMPI_B=3.1
+ENV OMPI_V=${OMPI_B}.1
+RUN wget -q -nc --no-check-certificate -P /var/tmp https://www.open-mpi.org/software/ompi/v${OMPI_B}/downloads/openmpi-${OMPI_V}.tar.bz2
+RUN tar -j -x -f /var/tmp/openmpi-${OMPI_V}.tar.bz2 -C /var/tmp
+WORKDIR /var/tmp/openmpi-${OMPI_V}
+RUN ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
+    --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs --with-slurm --with-pmi
+#    --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr
+RUN make -j"$(nproc)"
+RUN make -j"$(nproc)" install
+RUN echo "/usr/local/openmpi/lib" >> /etc/ld.so.conf.d/openmpi.conf
+RUN ldconfig
+RUN rm -rf /var/tmp/openmpi-${OMPI_V}.tar.bz2 /var/tmp/openmpi-${OMPI_V}
+
+ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH \
+    PATH=/usr/local/openmpi/bin:$PATH
 
 # Removing ubuntu openmpi breaks other packages, better not
 #RUN apt-get -y remove openmpi-bin

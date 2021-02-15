@@ -64,7 +64,8 @@ RUN tar -j -x -f /var/tmp/openmpi-${OMPI_V}.tar.bz2 -C /var/tmp
 WORKDIR /var/tmp/openmpi-${OMPI_V}
 RUN ./configure --prefix=/usr/local/openmpi --disable-getpwuid \
     --enable-orterun-prefix-by-default --with-cuda=/usr/local/cuda --with-verbs --with-slurm \
-    --with-pmi=/usr/local/include/slurm --with-pmi-libdir=/usr/local/lib
+    --with-pmi=/usr/local/include/slurm --with-pmi-libdir=/usr/local/lib \
+    CPPFLAGS=-I/usr/local/include/slurm LDFLAGS=-L/usr/local/lib
 #    --with-pmix=/usr/local/pmix --with-libevent=/usr --with-hwloc=/usr
 RUN make -j"$(nproc)"
 RUN make -j"$(nproc)" install

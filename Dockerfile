@@ -1,5 +1,6 @@
-FROM nvidia/cuda-ppc64le:9.2-cudnn7-runtime-ubuntu16.04
+#FROM nvidia/cuda-ppc64le:9.2-cudnn7-runtime-ubuntu16.04
 #FROM nvidia/cuda-ppc64le:11.0-cudnn8-runtime-ubuntu18.04
+FROM nvidia/cuda:11.2.1-cudnn8-runtime-ubuntu20.04
 LABEL maintainer="andmax@gmail.com"
 
 RUN apt-get update -y
@@ -20,7 +21,7 @@ RUN apt-get install -y --no-install-recommends bzip2 perftest cron
 #RUN apt-get install -y --no-install-recommends automake autoconf libtool libevent-dev libhwloc-dev
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y --no-install-recommends libmysqlclient-dev libhdf5-dev hdf5-tools libmunge2 munge
-RUN apt-get install -y --no-install-recommends cuda-samples-9-2
+#RUN apt-get install -y --no-install-recommends cuda-samples-9-2
 #RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 RUN apt-get -y clean
 
@@ -91,8 +92,10 @@ RUN apt-get -y update
 
 RUN pip install --upgrade pip
 
-RUN wget https://repo.anaconda.com/archive/Anaconda3-2020.02-Linux-ppc64le.sh
-RUN bash Anaconda3-2020.02-Linux-ppc64le.sh -b -p /usr/local/anaconda3 -f
+#ENV ANACONDA_V=Anaconda3-2020.02-Linux-ppc64le
+ENV ANACONDA_V=Anaconda3-2020.11-Linux-x86_64
+RUN wget https://repo.anaconda.com/archive/${ANACONDA_V}.sh
+RUN bash ${ANACONDA_V}.sh -b -p /usr/local/anaconda3 -f
 ENV PATH /usr/local/anaconda3/bin:$PATH
 RUN conda init --system
 RUN conda update conda

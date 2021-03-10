@@ -3,6 +3,10 @@
 FROM nvidia/cuda:11.2.1-cudnn8-devel-ubuntu20.04
 LABEL maintainer="andmax@gmail.com"
 
+ARG DEBIAN_FRONTEND=noninteractive
+ENV TZ=US/Central
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN apt-get update -y
 RUN apt-get install -y --no-install-recommends curl wget tar file htop nano vim emacs
 RUN apt-get -y clean

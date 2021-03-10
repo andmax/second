@@ -22,11 +22,11 @@ RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-
 RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz libpng-dev
 RUN apt-get install -y --no-install-recommends bzip2 perftest cron
-#RUN apt-get install -y --no-install-recommends automake autoconf libtool libevent-dev libhwloc-dev
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y --no-install-recommends libmysqlclient-dev libhdf5-dev hdf5-tools libmunge2 munge
-RUN apt-get install -y --no-install-recommends python3-pip
-RUN apt-get install -y --no-install-recommends python3-docker
+#RUN apt-get install -y --no-install-recommends automake autoconf libtool libevent-dev libhwloc-dev
+#RUN apt-get install -y --no-install-recommends python3-pip
+#RUN apt-get install -y --no-install-recommends python3-docker
 #RUN apt-get install -y --no-install-recommends cuda-samples-9-2
 #RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 RUN apt-get -y clean
@@ -107,16 +107,19 @@ RUN conda update conda
 # The below hack is not needed since conda init system does the shell hook
 #RUN eval "$(/usr/local/anaconda3/bin/conda shell.bash hook)"
 
-RUN conda install python=3.7 pip
+RUN conda install python=3.7
 RUN conda install -c conda-forge boost==1.67
 RUN conda install -c conda-forge numpy setuptools mpi4py pygraphml
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
 RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter notebook
+RUN conda install pip
+
 # There is no need for ipcluster and mpi4py
 #RUN conda install -c conda-forge ipyparallel
 #RUN pip install mpi4py
 
-RUN curl -L https://bit.ly/glances | /bin/bash
+RUN pip install glances
+#RUN curl -L https://bit.ly/glances | /bin/bash
 
 RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace

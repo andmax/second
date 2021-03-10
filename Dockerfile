@@ -26,7 +26,7 @@ RUN apt-get install -y --no-install-recommends bzip2 perftest cron
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y --no-install-recommends libmysqlclient-dev libhdf5-dev hdf5-tools libmunge2 munge
 RUN apt-get install -y --no-install-recommends python3-pip
-RUN apt-get install -y --no-install-recommends python-docker
+RUN apt-get install -y --no-install-recommends python3-docker
 #RUN apt-get install -y --no-install-recommends cuda-samples-9-2
 #RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 RUN apt-get -y clean

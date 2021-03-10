@@ -105,6 +105,7 @@ RUN conda update conda
 # The below hack is not needed since conda init system does the shell hook
 #RUN eval "$(/usr/local/anaconda3/bin/conda shell.bash hook)"
 
+RUN conda install python=3.7
 RUN conda install -c conda-forge boost==1.67
 RUN conda install -c conda-forge numpy setuptools mpi4py pygraphml
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image

@@ -1,6 +1,6 @@
 {
     "name": "ubu20x86cuda11slurm20",
-    "description": "Ubuntu 20.04 on Intel x80 64-bit with CUDA 11.2 and SLURM 20.11",
+    "description": "Ubuntu 20.04 on Intel/AMD x80 64-bit with CUDA 11.2 and SLURM 20.11",
     "author": "Andre Maximo", 
     "licensed": true, 
     "classifications": [

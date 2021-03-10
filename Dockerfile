@@ -94,8 +94,6 @@ RUN apt-get -y update
 #    jupyter jupyter_contrib_nbextensions jupyter_nbextensions_configurator
 #RUN jupyter contrib nbextension install
 
-RUN pip install --upgrade pip
-
 #ENV ANACONDA_V=Anaconda3-2020.02-Linux-ppc64le
 ENV ANACONDA_V=Anaconda3-2020.11-Linux-x86_64
 ENV ANACONDA_D=/usr/local/anaconda3

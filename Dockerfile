@@ -21,10 +21,12 @@ RUN apt-get install -y --no-install-recommends libboost-all-dev xutils-dev qtbas
 RUN apt-get install -y --no-install-recommends libxslt-dev libmunge-dev libxml2-dev libopenblas-dev liblapack-dev
 RUN apt-get install -y --no-install-recommends libnccl-dev libffi-dev libgeos-dev libicu-dev libbz2-dev liblz-dev
 RUN apt-get install -y --no-install-recommends texlive-xetex libfreetype6-dev gnuplot graphviz libpng-dev
-RUN apt-get install -y --no-install-recommends bzip2 perftest cron python3-pip python-docker
+RUN apt-get install -y --no-install-recommends bzip2 perftest cron
 #RUN apt-get install -y --no-install-recommends automake autoconf libtool libevent-dev libhwloc-dev
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y --no-install-recommends libmysqlclient-dev libhdf5-dev hdf5-tools libmunge2 munge
+RUN apt-get install -y --no-install-recommends python3-pip
+RUN apt-get install -y --no-install-recommends python-docker
 #RUN apt-get install -y --no-install-recommends cuda-samples-9-2
 #RUN apt-get install -y --no-install-recommends cuda-samples-11-0
 RUN apt-get -y clean

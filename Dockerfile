@@ -94,15 +94,17 @@ RUN pip install --upgrade pip
 
 #ENV ANACONDA_V=Anaconda3-2020.02-Linux-ppc64le
 ENV ANACONDA_V=Anaconda3-2020.11-Linux-x86_64
+ENV ANACONDA_D=/usr/local/anaconda3
 RUN wget https://repo.anaconda.com/archive/${ANACONDA_V}.sh
-RUN bash ${ANACONDA_V}.sh -b -p /usr/local/anaconda3 -f
-ENV PATH /usr/local/anaconda3/bin:$PATH
+RUN bash ${ANACONDA_V}.sh -b -p ${ANACONDA_D} -f
+ENV PATH ${ANACONDA_D}/bin:$PATH
 RUN conda init --system
 RUN conda update conda
 # The below hack is not needed since conda init system does the shell hook
 #RUN eval "$(/usr/local/anaconda3/bin/conda shell.bash hook)"
 
-RUN conda install -c conda-forge boost numpy setuptools mpi4py pygraphml
+RUN conda install -c conda-forge boost==1.67
+RUN conda install -c conda-forge numpy setuptools mpi4py pygraphml
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
 RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter notebook
 # There is no need for ipcluster and mpi4py

@@ -133,6 +133,10 @@ RUN echo "/data/inglib/power8/bin" >> /etc/ld.so.conf.d/ibf.conf && ldconfig
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
+RUN touch /etc/rc.local
+RUN chmod a+x /etc/rc.local
+RUN systemctl enable rc-local.service
+
 RUN echo "\
 #!/bin/bash\n\
 /data/snail/slurm_nimbix/install_extra.sh\n\

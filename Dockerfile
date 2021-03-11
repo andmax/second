@@ -109,9 +109,12 @@ RUN conda update conda
 
 RUN conda install python=3.7
 RUN conda install -c conda-forge boost==1.67
-RUN conda install -c conda-forge numpy setuptools mpi4py pygraphml
+RUN conda install -c conda-forge six setuptools pygraphml jsonschema numpy
 RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
-RUN conda install -c conda-forge six jsonschema ipython ipywidgets jupyter notebook
+RUN conda install -c conda-forge ipython ipywidgets jupyter notebook
+#RUN conda install mpi4py
+
+# We do need pip inside anaconda to install its package also inside conda env
 RUN conda install pip
 
 # There is no need for ipcluster and mpi4py

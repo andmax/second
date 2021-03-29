@@ -1,5 +1,5 @@
 {
-    "name": "ubu20x86cuda11slurm20",
+    "name": "ubu16ppc64cuda9slurm20",
     "description": "Ubuntu 16.04 on IBM PowerPC 64-bit with CUDA 9.2 and SLURM 20.11",
     "author": "Andre Maximo", 
     "licensed": true, 

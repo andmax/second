@@ -1,8 +1,8 @@
 # IBM PowerPC 64 ppc64
-#FROM nvidia/cuda-ppc64le:9.2-cudnn7-runtime-ubuntu16.04
+FROM nvidia/cuda-ppc64le:9.2-cudnn7-runtime-ubuntu16.04
 #FROM nvidia/cuda-ppc64le:11.0-cudnn8-runtime-ubuntu18.04
 # Intel/AMD 64-bit x86_64
-FROM nvidia/cuda:11.2.1-cudnn8-devel-ubuntu20.04
+#FROM nvidia/cuda:11.2.1-cudnn8-devel-ubuntu20.04
 LABEL maintainer="andmax@gmail.com"
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -84,7 +84,7 @@ RUN rm -rf /var/tmp/openmpi-${OMPI_V}.tar.bz2 /var/tmp/openmpi-${OMPI_V}
 
 ENV LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH
 # IBM PowerPC 64 ppc64
-#ENV LD_LIBRARY_PATH=/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/usr/lib/powerpc64le-linux-gnu:$LD_LIBRARY_PATH
 ENV PATH=/usr/local/openmpi/bin:$PATH
 
 # Removing ubuntu openmpi breaks other packages, better not
@@ -101,9 +101,9 @@ RUN apt-get -y update
 #RUN jupyter contrib nbextension install
 
 # IBM PowerPC 64 ppc64
-#ENV ANACONDA_V=Anaconda3-2020.02-Linux-ppc64le
+ENV ANACONDA_V=Anaconda3-2020.11-Linux-ppc64le
 # Intel/AMD 64-bit x86_64
-ENV ANACONDA_V=Anaconda3-2020.11-Linux-x86_64
+#ENV ANACONDA_V=Anaconda3-2020.11-Linux-x86_64
 ENV ANACONDA_D=/usr/local/anaconda3
 RUN wget https://repo.anaconda.com/archive/${ANACONDA_V}.sh
 RUN bash ${ANACONDA_V}.sh -b -p ${ANACONDA_D} -f

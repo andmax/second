@@ -1,0 +1,10 @@
+#!/bin/sh -e
+# rc.local
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will exit 0 on success or any other
+# value on error.
+/data/snail/slurm_nimbix/install_extra.sh
+/data/snail/slurm_nimbix/all_create_user.sh
+/data/snail/slurm_nimbix/all_start_jupyter.sh
+/data/snail/slurm_nimbix/start_services.sh
+exit 0

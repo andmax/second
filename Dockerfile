@@ -1,6 +1,5 @@
 # IBM PowerPC 64 ppc64
 FROM nvidia/cuda-ppc64le:9.2-cudnn7-devel-ubuntu16.04
-#FROM nvidia/cuda-ppc64le:9.2-cudnn7-runtime-ubuntu16.04
 #FROM nvidia/cuda-ppc64le:11.0-cudnn8-devel-ubuntu18.04
 # Intel/AMD 64-bit x86_64
 #FROM nvidia/cuda:11.2.1-cudnn8-devel-ubuntu20.04

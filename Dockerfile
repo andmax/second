@@ -139,33 +139,8 @@ RUN echo "/data/inglib/power8/bin" >> /etc/ld.so.conf.d/ibf.conf && ldconfig
 ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
-RUN echo "\
-[Unit]\n\
-Description=/etc/rc.local Compatibility\n\
-ConditionPathExists=/etc/rc.local\n\
-[Service]\n\
-Type=forking\n\
-ExecStart=/etc/rc.local start\n\
-TimeoutSec=0\n\
-StandardOutput=tty\n\
-RemainAfterExit=yes\n\
-SysVStartPriority=99\n\
-[Install]\n\
-WantedBy=multi-user.target\
-" > /etc/systemd/system/rc-local.service
-
-RUN echo "\
-\#!/bin/sh -e\n\
-\# rc.local\n\
-\# This script is executed at the end of each multiuser runlevel.\n\
-\# Make sure that the script will exit 0 on success or any other\n\
-\# value on error.\n\
-/data/snail/slurm_nimbix/install_extra.sh\n\
-/data/snail/slurm_nimbix/all_create_user.sh\n\
-/data/snail/slurm_nimbix/all_start_jupyter.sh\n\
-/data/snail/slurm_nimbix/start_services.sh\n\
-exit 0\
-" > /etc/rc.local
+COPY rc-local.service /etc/systemd/system/
+COPY rc.local /etc/rc.local
 
 RUN chmod a+rx /etc/rc.local
 RUN systemctl enable rc-local.service

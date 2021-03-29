@@ -140,7 +140,7 @@ ADD AppDef.json /etc/NAE/AppDef.json
 RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
 
 COPY rc-local.service /etc/systemd/system/
-COPY rc.local /etc/rc.local
+COPY rc.local /etc/
 
 RUN chmod a+rx /etc/rc.local
 RUN systemctl enable rc-local.service

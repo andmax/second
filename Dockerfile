@@ -155,11 +155,11 @@ WantedBy=multi-user.target\
 " > /etc/systemd/system/rc-local.service
 
 RUN echo "\
-#!/bin/sh -e\n\
-# rc.local\n\
-# This script is executed at the end of each multiuser runlevel.\n\
-# Make sure that the script will exit 0 on success or any other\n\
-# value on error.\n\
+\#!/bin/sh -e\n\
+\# rc.local\n\
+\# This script is executed at the end of each multiuser runlevel.\n\
+\# Make sure that the script will exit 0 on success or any other\n\
+\# value on error.\n\
 /data/snail/slurm_nimbix/install_extra.sh\n\
 /data/snail/slurm_nimbix/all_create_user.sh\n\
 /data/snail/slurm_nimbix/all_start_jupyter.sh\n\

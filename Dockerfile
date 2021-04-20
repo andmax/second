@@ -39,6 +39,7 @@ RUN apt-get -y clean
 
 RUN mkdir -p /var/tmp
 
+# We don't need to use PMIX to fix SLURM-MPI integration
 #ENV PMIX_V=3.1.6
 #RUN wget -q -nc --no-check-certificate -P /var/tmp https://github.com/openpmix/openpmix/releases/download/v${PMIX_V}/pmix-${PMIX_V}.tar.bz2
 #RUN tar -j -x -f /var/tmp/pmix-${PMIX_V}.tar.bz2 -C /var/tmp
@@ -111,7 +112,7 @@ ENV PATH ${ANACONDA_D}/bin:$PATH
 RUN conda init --system
 RUN conda update conda
 # The below hack is not needed since conda init system does the shell hook
-#RUN eval "$(/usr/local/anaconda3/bin/conda shell.bash hook)"
+RUN eval "$(/usr/local/anaconda3/bin/conda shell.bash hook)"
 
 RUN conda install python=3.7
 RUN conda install -c conda-forge boost==1.67

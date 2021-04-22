@@ -57,7 +57,11 @@ RUN mkdir -p /var/spool/slurm/d /var/spool/slurm/ctld /var/run/slurm /var/log/sl
 RUN wget -q -nc --no-check-certificate -P /var/tmp https://download.schedmd.com/slurm/slurm-${SLURM_V}.tar.bz2
 RUN tar -j -x -f /var/tmp/slurm-${SLURM_V}.tar.bz2 -C /var/tmp
 WORKDIR /var/tmp/slurm-${SLURM_V}
-RUN ./configure --with-mysql_config=/usr/bin --with-hdf5=no --with-munge=/usr/lib/libmunge.so
+# IBM PowerPC 64 ppc64
+#RUN ./configure --with-mysql_config=/usr/bin --with-hdf5=no --with-munge=/usr/lib/libmunge.so
+# Intel/AMD 64-bit x86_64
+RUN ./configure --with-mysql_config=/usr/bin --with-hdf5=no --with-munge=/usr/lib/x86_64-linux-gnu/libmunge.so
+# To configure SLURM with PMIX should add the below line to the configure command:
 #    --with-pmix=/usr/local/pmix --with-hwloc=/usr
 RUN make -j"$(nproc)"
 RUN make -j"$(nproc)" install

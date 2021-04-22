@@ -139,7 +139,8 @@ RUN mkdir -p /workspace
 COPY mpi_bw.c /workspace
 RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
 
-RUN echo "/data/inglib/power8/bin" >> /etc/ld.so.conf.d/ibf.conf && ldconfig
+# IBF will be deployed by SNAIL at /usr/local/lib
+#RUN echo "/data/inglib/power8/bin" >> /etc/ld.so.conf.d/ibf.conf && ldconfig
 
 ADD AppDef.json /etc/NAE/AppDef.json
 # Old api.jarvice.com platform

@@ -142,7 +142,10 @@ RUN mpicc -o /workspace/mpi_bw /workspace/mpi_bw.c
 RUN echo "/data/inglib/power8/bin" >> /etc/ld.so.conf.d/ibf.conf && ldconfig
 
 ADD AppDef.json /etc/NAE/AppDef.json
-RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
+# Old api.jarvice.com platform
+#RUN wget --post-file=/etc/NAE/AppDef.json --no-verbose https://api.jarvice.com/jarvice/validate -O -
+# New cloud.nimbix.net platform
+RUN curl --fail -X POST -d @/etc/NAE/AppDef.json https://cloud.nimbix.net/api/jarvice/validate
 
 COPY rc-local.service /etc/systemd/system/
 COPY rc.local /etc/

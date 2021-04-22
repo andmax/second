@@ -110,19 +110,19 @@ RUN wget https://repo.anaconda.com/archive/${ANACONDA_V}.sh
 RUN bash ${ANACONDA_V}.sh -b -p ${ANACONDA_D} -f
 ENV PATH ${ANACONDA_D}/bin:$PATH
 RUN conda init --system
-RUN conda update conda
+RUN conda update -y conda
 # The below hack is not needed since conda init system does the shell hook
 RUN eval "$(/usr/local/anaconda3/bin/conda shell.bash hook)"
 
-RUN conda install python=3.7
-RUN conda install -c conda-forge boost==1.67
-RUN conda install -c conda-forge six setuptools pygraphml jsonschema numpy
-RUN conda install -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
-RUN conda install -c conda-forge ipython ipywidgets jupyter notebook
+RUN conda install -y python=3.7
+RUN conda install -y -c conda-forge boost==1.67
+RUN conda install -y -c conda-forge six setuptools pygraphml jsonschema numpy
+RUN conda install -y -c conda-forge pandas matplotlib scipy scikit-learn scikit-image
+RUN conda install -y -c conda-forge ipython ipywidgets jupyter notebook
 #RUN conda install mpi4py
 
 # We do need pip inside anaconda to install its package also inside conda env
-RUN conda install pip
+RUN conda install -y pip
 
 # There is no need for ipcluster and mpi4py
 #RUN conda install -c conda-forge ipyparallel

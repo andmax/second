@@ -15,6 +15,10 @@ RUN apt-get -y clean
 
 RUN curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/nimbix/image-common/master/install-nimbix.sh | bash -s
 
+# This is to fix the sticky bit of /run to allow munge to run properly
+# (munge is used by slurm for authentication)
+RUN chmod +t /run
+
 RUN apt-get update -y --fix-missing
 RUN apt-get install -y --no-install-recommends pkg-config debhelper dkms build-essential software-properties-common
 RUN apt-get install -y --no-install-recommends pciutils iputils-ping apt-utils hwloc ltrace strace ibverbs-utils
